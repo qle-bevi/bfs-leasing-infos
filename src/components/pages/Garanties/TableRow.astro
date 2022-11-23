@@ -1,0 +1,37 @@
+---
+import type { Props } from "astro";
+import clsx from "clsx";
+
+interface TableRowProps extends Props {
+    noBorder?: boolean;
+}
+
+const { noBorder = false } = Astro.props as TableRowProps;
+---
+
+<tr 
+    class={
+        clsx({
+            "border-b border-b-bmw-gray/20": !noBorder
+        })
+    }>
+    <td class="text-center px-18 py-8">
+        <slot name="text" />
+    </td>
+    <td class="bg-[#EEEEEE] border-l border-l-white">
+        <div class="w-full h-full flex justify-center items-center">
+            <slot name="WI" />
+        </div>
+    </td>
+    <td class="bg-[#EEEEEE] border-l border-l-white py-4">
+        <div class="w-full h-full flex justify-center items-center">
+            <slot name="GVA" />
+        </div>
+    </td>
+    <td class="bg-[#B2D1E7] border-l border-l-white py-4">
+        <div class="w-full h-full flex justify-center items-center">
+            <slot name="GPF" />
+            <stot name="GPF_TEXT" />
+        </div>
+    </td>
+</tr>

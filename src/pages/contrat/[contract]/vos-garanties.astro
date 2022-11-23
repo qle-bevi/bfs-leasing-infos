@@ -1,0 +1,255 @@
+---
+import PageHeader from "../../../components/PageHeader.astro";
+import Page from "../../../layouts/Page.astro";
+import garantiesBackground from "../../../assets/images/garanties_background.jpg";
+import type { Props } from "astro";
+import { contracts } from "../../../contracts";
+import type { ContractInfo } from "../../../typings";
+import Umbrella from "../../../components/SVG/Umbrella.astro";
+import Cross from "../../../components/SVG/Cross.astro";
+import Check from "../../../components/SVG/Check.astro";
+import Section from "../../../components/Section.astro";
+import TabMenu from "../../../components/TabMenu";
+import SectionTitle from "../../../components/SectionTitle.astro";
+import SectionSubTitle from "../../../components/SectionSubTitle.astro";
+import Paragraph from "../../../components/Paragraph.astro";
+import renouvellementImg from "../../../assets/images/renouvellement.jpg";
+import { Picture } from "@astrojs/image/components";
+import TableRow from "../../../components/pages/Garanties/TableRow.astro";
+
+export const getStaticPaths = () => {
+    return contracts.map(c => ({ params: { contract: c.path }, props: { contract: c }}))
+}
+
+interface AvantagesProps extends Props {
+    contract: ContractInfo
+}
+
+const { contract } = Astro.props as AvantagesProps;
+
+---
+
+<Page title="Vos garanties">
+    <PageHeader
+        slot="header"
+        imageSrc={garantiesBackground}
+        imageAlt="Vos garanties"
+        imagePosition="top"
+        title={contract.cosyName}
+        subTitle="Vos services"
+        menuUrl={`/contrat/${contract.path}`}
+    >
+        <Umbrella slot="icon" class="w-8 h-auto" />
+    </PageHeader>
+        <TabMenu
+            client:visible
+            items={[
+                { title: "Garantie valeur d'achat", key: "GVA" },
+                { title: "Garantie perte financière", key: "GPF" },
+            ]}
+            initialKey="GVA"
+        >
+                <div slot="GVA" class="w-full">
+                    <Section>
+                        <SectionTitle>{"Garantie valeur d'achat"}</SectionTitle>
+                        <SectionSubTitle>{"un complément d'indemnisation jusqu'à la valeur d'achat du véhicule."}</SectionSubTitle>
+                        <Paragraph>
+                            Pendant une durée de couverture que vous choisissez (36, 48 ou 60 mois), en cas de vol ou de destruction totale de votre véhicule, nous vous remboursons :​
+                            <br><br>
+                            • la <span class="font-bold">franchise</span> de votre assureur principal,.<br>
+                            • la différence entre :​<br>
+                            - la valeur d’achat (MALUS écologiques exclus)​ <br>
+                            - et la valeur la plus élevée entre l’indemnité de l’assureur principal et la valeur​ économique à dire d’expert.​<br>
+                        </Paragraph>
+                        <Paragraph last>
+                            Au-delà de cette durée de couverture ​et jusqu’à la fin du financement, ​vous bénéficiez d’un remboursement plafonné à​ 40% de la valeur d’achat 
+                            dans la limite de 40 000€.​​
+                        </Paragraph>
+                    </Section>
+                    <Section>
+                        <SectionSubTitle>{"votre mobilité garantie."}</SectionSubTitle>
+                        <Paragraph last>
+                            Un véhicule de remplacement (catégorie C) : jusqu’à 20 jours en cas de perte totale, jusqu’à 40 jours en cas de vol.
+                        </Paragraph>
+                    </Section>
+                    <Section>
+                        <div class="flex flex-col md:flex-row items-stretch space-y-8 md:space-x-8 md:space-y-0">
+                            <div class="flex-1 flex flex-col">
+                                <SectionSubTitle>{"votre avantage renouvellement."}</SectionSubTitle>
+                                <Paragraph last>
+                                    En cas de renouvellement et financement d’un véhicule neuf de la marque suite à un vol ou une perte totale :​
+                                    <br><br>
+                                    • <span class="font-bold">Indemnisation est augmentée de 10%</span> si le sinistre intervient pendant 
+                                    la durée de couverture de votre garantie.​
+                                    <br><br>
+                                    • Vous disposez d’un véhicule de remplacement jusqu’à 90 jours.​
+                                    <br><br>
+                                    Au-delà de cette durée, le plafond de remboursement de la <span class="font-bold">valeur d’achat 
+                                    est augmenté à 52%</span> dans la limite de 52 000€.​
+                                </Paragraph>
+                            </div>
+                            <Picture
+                                src={renouvellementImg}
+                                fill="cover"
+                                alt="couple qui sourit"
+                                sizes="(min-width: 768px) 40vw, 100vw"
+                                widths={[420, 520, 720]}
+                                aspectRatio="719:414"
+                            />
+                        </div>
+                    </Section>
+                    <Section noBorder>
+                        <SectionSubTitle>{"les événements familiaux."}</SectionSubTitle>
+                        <Paragraph>
+                            En cas d'imprévu, vous pouvez solder sereinement votre financement.
+                        </Paragraph>
+                        <Paragraph>
+                            <span class="font-bold">PRINCIPE</span>
+                            <br><br>
+                            Vous devez solder de manière anticipée votre financement pour pouvoir revendre votre véhicule :
+                            <br><br>
+                            • Nous vous versons <span class="font-bold">2 échéances</span> (hors assurances) de votre contrat de financement soldé (dans la limite de 800€ au total).
+                        </Paragraph>
+                        <Paragraph last>
+                            <span class="font-bold uppercase">VENTE Consécutive à :</span>
+                            <br><br>
+                            • Mariage ou PACS
+                            <br><br>
+                            • Naissance ou adoption
+                            <br><br>
+                            • Divorce ou dissolution de PACS
+                            <br><br>
+                            • Perte d'emploi suite à un licenciement
+                            <br><br>
+                            • Cessation définitive d'activité professionnelle suite à des difficultés économiques
+                        </Paragraph>
+                    </Section>
+                </div>
+                <div slot="GPF" class="w-full">
+                    <Section>
+                        <SectionTitle>{"Garantie perte financière"}</SectionTitle>
+                        <SectionSubTitle>{"un complément d'indemnisation jusqu'au solde de votre financement."}</SectionSubTitle>
+                        <Paragraph last>
+                            Pendant une durée de couverture que vous choisissez (36, 48 ou 60 mois), en cas de vol ou de destruction totale de votre véhicule, nous vous remboursons :​
+                            <br><br>
+                            • La franchise de votre assureur principal​
+                            <br><br>
+                            • La différence entre :​<br>
+                            - le solde(1) de financement en cours​<br>
+                            - et la valeur la plus élevée entre l’indemnité de votre assureur principal et la valeur​ économique à dire d’expert.​
+                            <br><br>
+                            • Durée de la garantie : durée du financement​
+                            <br><br>
+                            • Type de financement : crédit ou LOA, apport inférieur à 20%​
+                        </Paragraph>
+                    </Section>
+                    <div class="px-16">
+                        <table class="w-full mb-10">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th class="text-bold text-center p-4 uppercase w-[22.7%]">
+                                        SANS ASSURANCE
+                                    </th>
+                                    <th class="text-bold text-center p-4 uppercase w-[22.7%]">
+                                        Garantie<br> PERTE FINAncière(3)
+                                    </th>
+                                    <th class="text-bold text-center text-bmw-blue p-4 uppercase w-[22.7%]">
+                                        Garantie<br> valeur d'achat(1)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <TableRow>
+                                    <span slot="text">
+                                        Solde du financement et valeur
+                                        économique à dire d’expert
+                                        <br>ou<br>
+                                        Solde du financement et indemnité
+                                        de votre assureur principal
+                                    </span>
+                                    <Cross slot="WI" class="w-12 h-auto" />
+                                    <Check slot="GVA"class="w-12 h-auto" />
+                                    <Cross slot="GPF" class="w-12 h-auto" />
+                                </TableRow>
+                                <TableRow>
+                                    <span slot="text">
+                                        Valeur d’achat et valeur économique
+                                        à dire d’expert
+                                        <br>ou<br>
+                                        Valeur d’achat et indemnité de votre
+                                        assureur principal
+                                    </span>
+                                    <Cross slot="WI" class="w-12 h-auto" />
+                                    <Cross slot="GVA"class="w-12 h-auto" />
+                                    <Check slot="GPF" class="w-12 h-auto" />
+                                </TableRow>
+                                <TableRow>
+                                    <span slot="text">
+                                        Durée de couverture de la garantie
+                                    </span>
+                                    <Cross slot="WI" class="w-12 h-auto" />
+                                    <div slot="GVA" class="flex flex-col justify-center items-center">
+                                        <Cross class="w-12 h-auto" />
+                                        <span class="mt-4">Durée du financement</span>
+                                    </div>
+                                    <div slot="GPF" class="flex flex-col justify-center items-center">
+                                        <Check class="w-12 h-auto" />
+                                        <span class="mt-4">36, 48 ou 60 mois</span>
+                                    </div>  
+                                </TableRow>
+                                <TableRow>
+                                    <span slot="text">
+                                        Plafond de remboursement au-delà de la durée choisie
+                                        <br>(36, 48 ou 60 mois) :
+                                    </span>
+                                    <Cross slot="WI" class="w-12 h-auto" />
+                                    <Cross slot="GVA"class="w-12 h-auto" />
+                                    <div slot="GPF" class="flex flex-col justify-center items-center">
+                                        <Check class="w-12 h-auto" />
+                                        <span class="mt-4">40% dans la limite de 40 000 €</span>
+                                    </div> 
+                                </TableRow>
+                                <TableRow>
+                                    <span slot="text">
+                                        Avantage si renouvellement par un véhicule neuf ou d’occasion :	
+                                    </span>
+                                    <Cross slot="WI" class="w-12 h-auto" />
+                                    <Cross slot="GVA"class="w-12 h-auto" />
+                                    <div slot="GPF" class="flex flex-col justify-center items-center text-center">
+                                        <Check class="w-12 h-auto" />
+                                        <span class="mt-4">
+                                            Remboursement augmenté de 10% ou plafond de remboursement augmenté à 52% dans la limite de 52 000 €
+                                        </span>
+                                    </div> 
+                                </TableRow>
+                                <TableRow>
+                                    <span slot="text">
+                                        Assistance (2) - Véhicule de remplacement
+                                        <br>
+                                        (Cat. C)	
+                                    </span>
+                                    <Cross slot="WI" class="w-12 h-auto" />
+                                    <Cross slot="GVA"class="w-12 h-auto" />
+                                    <Check slot="GPF"class="w-12 h-auto" />
+                                </TableRow>
+                                <TableRow noBorder>
+                                    <span slot="text">
+                                        Évènements familiaux
+                                    </span>
+                                    <Cross slot="WI" class="w-12 h-auto" />
+                                    <Cross slot="GVA"class="w-12 h-auto" />
+                                    <Check slot="GPF"class="w-12 h-auto" />
+                                </TableRow>
+                            </tbody>
+                        </table>
+                        <p class="text-sm font-light">
+                            (1) (3) Les Garanties Valeur d’Achat et Perte Financière sont souscrites auprès de MMA IARD Assurances Mutuelles, société d’assurance mutuelle à cotisations fixes, siège social : 14 boulevard Marie et Alexandre Oyon, 72030 Le Mans Cedex 9, 775 652 126 RCS Le Mans, et MMA IARD SA, société anonyme au capital de 537.052.368 Euros, siège social : 14 boulevard Marie et Alexandre Oyon, 72030 Le Mans Cedex 9, 440 048 882 RCS Le Mans, sociétés régies par le Code des Assurances.<br>
+                            (2) Les prestations d’assistance sont assurées par Fragonard Assurances, SA au capital de 37.207.660 Euros, 479 065 351 RCS Paris, siège social : 2 rue Fragonard - 75017 Paris, entreprise régie par le Code des Assurances et mises en œuvre par AWP France SAS, société par actions simplifiée au capital de 7.584.076,86 Euros, 490 381 753 RCS Bobigny, siège social : 7 rue Dora Maar, CS 60001, 93400 Saint-Ouen, société de courtage d’assurances immatriculée à l’ORIAS (www.orias.fr) sous le numéro 07 026 669.<br>
+                            *Encours résiduel financier en LOA, Capital restant dû en crédit.<br>
+                            **BMW Financial Services, département de BMW Finance, SNC au capital de 87 000 000 Euros - RCS Versailles 343 606 448, Etablissement de Crédit Spécialisé ayant son siège social au 5 rue des Hérons 78180 Montigny-le-Bretonneux, agréé par l’Autorité de Contrôle Prudentiel et de Résolution (ACPR) sous le n°14670, courtier en Assurances inscrit à l’ORIAS sous le n° 07 00 88 83 (www.orias.fr).
+                        </p>
+                    </div>
+                </div>
+        </TabMenu>
+</Page>

@@ -1,1 +1,2 @@
-/// <reference types="astro/client" />
+/* eslint-disable @typescript-eslint/triple-slash-reference */
+/// <reference types="@astrojs/image/client" />

@@ -1,0 +1,43 @@
+---
+import type { Props } from "astro";
+import { contracts } from "../../../contracts";
+import Page from "../../../layouts/Page.astro";
+import headerBackground from "../../../assets/images/fin_de_contrat_background.jpg";
+import PageHeader from "../../../components/PageHeader.astro";
+import AdvantagesList from "../../../components/pages/EndOfContract/AdvantagesList";
+import type { ContractInfo } from "../../../typings";
+import Calendar from "../../../components/Calendar.astro";
+
+
+export const getStaticPaths = () => {
+    return contracts.map(c => ({ params: { contract: c.path }, props: { contract: c }}))
+}
+
+interface AvantagesProps extends Props {
+    contract: ContractInfo
+}
+
+const { contract } = Astro.props as AvantagesProps;
+
+---
+
+<Page title="La fin de votre contrat">
+    <PageHeader
+        slot="header"
+        imageSrc={headerBackground}
+        imageAlt="La fin de votre contrat"
+        title={contract.cosyName}
+        subTitle="La fin de votre contrat"
+        menuUrl={`/contrat/${contract.path}`}
+    >
+        <Calendar slot="icon" class="w-8 h-auto" />
+    </PageHeader>
+    <div class="bg-white lg:px-14">
+        <p class="font-light mb-8">
+            <span class="font-bold">Vous souhaitez devenir propriétaire de votre BMW ? L'option d'achat sera prélevée sur votre compte bancaire le dernier jour de votre contrat.</span>
+            <br>
+            Suivez les étapes ci-dessous :
+        </p>
+        <AdvantagesList client:visible />
+    </div>
+</Page>

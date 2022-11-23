@@ -1,0 +1,42 @@
+---
+import type { Props } from "astro";
+import { contracts } from "../../../contracts";
+import Page from "../../../layouts/Page.astro";
+import avantagesBackground from "../../../assets/images/avantages_background.jpg";
+import ThumbsUp from "../../../components/SVG/ThumbsUp.astro";
+import PageHeader from "../../../components/PageHeader.astro";
+import AdvantagesList from "../../../components/pages/Advantages/AdvantagesList";
+import type { ContractInfo } from "../../../typings";
+
+
+export const getStaticPaths = () => {
+    return contracts.map(c => ({ params: { contract: c.path }, props: { contract: c }}))
+}
+
+interface AvantagesProps extends Props {
+    contract: ContractInfo
+}
+
+const { contract } = Astro.props as AvantagesProps;
+
+---
+
+<Page title="Les avantages de votre contrat">
+    <PageHeader
+        slot="header"
+        imageSrc={avantagesBackground}
+        imageAlt="Avantages de votre contrat"
+        title={contract.cosyName}
+        subTitle="Les avantages de votre contrat"
+        menuUrl={`/contrat/${contract.path}`}
+    >
+        <ThumbsUp slot="icon" class="w-8 h-auto" />
+    </PageHeader>
+    <div class="bg-white lg:px-14">
+        <p class="font-light mb-8">
+            En optant pour un contrat avec BMW Financial Services, vous avez le choix d'une solution sur-mesure et adaptée à vos besoins.
+            <br />Cliquez sur les icônes ci-dessous pour découvrir vos avantages
+        </p>
+        <AdvantagesList client:visible />
+    </div>
+</Page>

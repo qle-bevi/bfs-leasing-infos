@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'BMWTypeNextTT';
+    src: local('BMWTypeNextTT Light'), local('BMWTypeNextTT-Light'),
+        url('/fonts/BMWTypeNextTT-Light.woff2') format('woff2'),
+        url('/fonts/BMWTypeNextTT-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'BMWTypeNextTT';
+    src: local('BMWTypeNextTT Bold'), local('BMWTypeNextTT-Bold'),
+        url('/fonts/BMWTypeNextTT-Bold.woff2') format('woff2'),
+        url('/fonts/BMWTypeNextTT-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}

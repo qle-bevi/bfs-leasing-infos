@@ -1,0 +1,20 @@
+---
+import type { Props } from "astro";
+import clsx from "clsx";
+
+interface SectionProps extends Props {
+    noBorder?: boolean;
+}
+
+const { noBorder = false } = Astro.props as SectionProps;
+---
+
+<div 
+    class={
+        clsx(
+            "py-10 lg:px-14",
+            {"border-b border-b-bmw-light-gray": noBorder === false}
+        )
+    }>
+    <slot />
+</div>

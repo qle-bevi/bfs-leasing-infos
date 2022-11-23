@@ -1,0 +1,14 @@
+---
+import type { Props } from "astro";
+import clsx from "clsx";
+
+interface ParagraphProps extends Props {
+    last?: boolean;
+}
+
+const { last = false } = Astro.props as ParagraphProps;
+---
+
+<p class={clsx("w-full max-w-6xl", { 'mb-8': last === false })}>
+    <slot />
+</p>

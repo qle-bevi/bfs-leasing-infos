@@ -1,0 +1,98 @@
+---
+import { contracts } from "../../../contracts";
+import Layout from "../../../layouts/Layout.astro";
+import MenuBackground from "../../../assets/images/menu_background.jpg";
+import PageBackgroundImage from "../../../components/PageBackgroundImage.astro";
+import BmwLogo from "../../../components/SVG/BmwLogo.astro";
+import Footer from "../../../components/Footer.astro";
+import BurgerMenuButton from "../../../components/MenuButton.astro";
+import MenuButton from "../../../components/pages/Menu/MenuButton.astro";
+import ThumbsUp from "../../../components/SVG/ThumbsUp.astro";
+import GearIcon from "../../../components/SVG/GearIcon.astro";
+import Umbrella from "../../../components/SVG/Umbrella.astro";
+import Options from "../../../components/SVG/Options.astro";
+import Profile from "../../../components/SVG/Profile.astro";
+import Car from "../../../components/SVG/Car.astro";
+import Calendar from "../../../components/Calendar.astro";
+import DocCheck from "../../../components/SVG/DocCheck.astro";
+import Burger from "../../../components/SVG/Burger.astro";
+
+
+export const getStaticPaths = () => {
+    return contracts.map(c => ({ params: { contract: c.path }}))
+}
+
+const { contract: contractPath } = Astro.params;
+
+const contract = contracts.find((c) => c.path === contractPath)!;
+---
+
+<Layout title={`BMW Financial Services / contrat ${contract.name}`}>
+    <PageBackgroundImage imageSrc={MenuBackground}>
+        <div class="flex w-full h-full flex-col overflow-hidden">
+            <div class="flex flex-col items-center flex-grow px-12 pb-6 overflow-auto">
+                <header class="w-full pt-8 pb-4 flex flex-row justify-between items-center border-b border-white">
+                    <h1 class="text-white text-2xl font-bold text-shadow-xl">BMW Financial Services</h1>
+                    <div class="flex flex-row items-center space-x-8">
+                        <BurgerMenuButton href="/" />
+                        <BmwLogo class="w-16 h-auto" />
+                    </div>
+                </header>
+                <h2 class="text-white text-3xl font-light uppercase text-center my-6">
+                    vos informations pratiques sur votre <span class="font-bold">{contract.cosyName}</span>
+                </h2>
+                <div class="w-full max-w-5xl flex-1 grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    <MenuButton href={`/contrat/${contract.path}/vos-avantages`}>
+                        <ThumbsUp slot="icon" class="w-14 h-auto" />
+                        <span slot="text">
+                            Les avantages <br> de votre contract
+                        </span>
+                    </MenuButton>
+                    <MenuButton href={`/contrat/${contract.path}/vos-services`}>
+                        <GearIcon slot="icon" class="w-20 h-auto" />
+                        <span slot="text">
+                            Vos services
+                        </span>
+                    </MenuButton>
+                    <MenuButton href={`/contrat/${contract.path}/vos-garanties`}>
+                        <Umbrella slot="icon" class="w-16 h-auto" />
+                        <span slot="text">
+                            Vos garanties
+                        </span>
+                    </MenuButton>
+                    <MenuButton>
+                        <Options slot="icon" class="w-16 h-auto" />
+                        <span slot="text">
+                            Vos options
+                        </span>
+                    </MenuButton>
+                    <MenuButton href={`/contrat/${contract.path}/vos-contrats-et-demarches`}>
+                        <Profile slot="icon" class="w-14 h-auto" />
+                        <span slot="text">
+                            Vos contrats<br>et démarches
+                        </span>
+                    </MenuButton>
+                    <MenuButton href={`/contrat/${contract.path}/rachat-de-votre-vehicule-en-cours-de-contrat`}>
+                        <Car slot="icon" class="w-16 h-auto" />
+                        <span slot="text">
+                            rachat de votre véhicule en cours de contrat.
+                        </span>
+                    </MenuButton>
+                    <MenuButton href={`/contrat/${contract.path}/la-fin-de-votre-contrat`}>
+                        <Calendar slot="icon" class="w-12 h-auto" />
+                        <span slot="text">
+                            La fin de votre<br> contrat
+                        </span>
+                    </MenuButton>
+                    <MenuButton href={`/contrat/${contract.path}/en-cas-de-sinistre`}>
+                        <DocCheck slot="icon" class="w-10 h-auto" />
+                        <span slot="text">
+                            En cas de sinistre
+                        </span>
+                    </MenuButton>
+                </div>
+            </div>
+            <Footer />
+        </div>
+    </PageBackgroundImage>
+</Layout>

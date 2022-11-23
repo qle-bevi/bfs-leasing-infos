@@ -1,0 +1,135 @@
+---
+import type { Props } from "astro";
+import DocCheck from "../../../components/SVG/DocCheck.astro";
+import TabMenu from "../../../components/TabMenu";
+import sinistreBackground from "../../../assets/images/sinistre_background.jpg";
+import { contracts } from "../../../contracts";
+import type { ContractInfo } from "../../../typings";
+import PageHeader from "../../../components/PageHeader.astro";
+import Page from "../../../layouts/Page.astro";
+import Section from "../../../components/Section.astro";
+import SectionTitle from "../../../components/SectionTitle.astro";
+import Paragraph from "../../../components/Paragraph.astro";
+import MailButton from "../../../components/MailButton.astro";
+import InfosBar from "../../../components/InfosBar.astro";
+
+
+export const getStaticPaths = () => {
+    return contracts.map(c => ({ params: { contract: c.path }, props: { contract: c }}))
+}
+
+interface AvantagesProps extends Props {
+    contract: ContractInfo
+}
+
+const { contract } = Astro.props as AvantagesProps;
+---
+
+<Page title="En cas de sinistre">
+    <PageHeader
+        slot="header"
+        imageSrc={sinistreBackground}
+        imageAlt="En cas de sinistre"
+        imagePosition="top"
+        title={contract.cosyName}
+        subTitle="En cas de sinistre"
+        menuUrl={`/contrat/${contract.path}`}
+    >
+        <DocCheck slot="icon" class="w-8 h-auto" />
+    </PageHeader>
+        <TabMenu
+            client:visible
+            items={[
+                { title: "véhicule volé", key: "vol" },
+                { title: "véhicule accidenté", key: "accident" },
+            ]}
+            initialKey="vol"
+        >
+                <div slot="vol">
+                    <Section>
+                        <SectionTitle>Votre véhicule vient d'être volé</SectionTitle>
+                        <Paragraph>
+                            Vous devez déclarer immédiatement votre sinistre auprès de votre assurance.<br>
+                            Vous devez ensuite dans les plus brefs délais adresser au service sinistre BMW Financial Services les documents suivants par e-mail : contact-finance@bmw.fr​
+                            <br><br>
+                            • La copie du procès-verbal de vol<br>
+                            • Les coordonnées complètes de votre assurance (mail + tel)<br>
+                            • Le numéro du sinistre<br>
+                            • La copie du certificat d’immatriculation<br>
+                            • Le procès-Verbal de vol du véhicule<br>
+                        </Paragraph>
+                        <MailButton href="mailto:contact-finance@bmw.fr">
+                            contact-finance@bmw.fr
+                        </MailButton>
+                    </Section>
+                    <Section noBorder>
+                        <Paragraph last>
+                            BMW Financial Services transmettra la carte grise originale et la cession à votre assurance.​
+                            <br><br>
+                            A réception des éléments, l’assureur procède au réglement en fonction de votre assurance (franchise, valeur à neuf, etc…).​
+                            <br><br>
+                            L’indemnisation est adressée à BMW Financial Services et vient réduire ou solder le montant restant dû.​
+                            <br><br>
+                            Si vous avez souscrit à la Garantie Valeur à Neuf ou Perte Financière auprès de BMW Financial Services, à réception de l'indemnisation de votre assureur nous vous 
+                            demanderons plusieurs éléments (en fonction de l’assurance souscrite).​
+                            <br><br>
+                            L’indemnisation est encaissée sur votre contrat de financement et, en cas de trop-perçu​ (y compris les éventuels loyers depuis la date du sinistre), le montant excédentaire 
+                            est viré sous 48 à 72h sur votre compte bancaire.​
+                            <br><br>
+                            Lorsque le contrat est soldé, vous recevez une attestation « dossier clos ».​
+                        </Paragraph>
+                    </Section>
+                </div>
+                <div slot="accident">
+                    <Section>
+                        <SectionTitle>votre véhicule vient d'être accidenté (sinistre total).</SectionTitle>
+                        <Paragraph>
+                            En cas d’accident, vous devez déclarer immédiatement votre sinistre auprès de votre assurance.​<br>
+                            Attention, vous ne devez prendre aucune décision sans l’accord de BMW Financial Services, propriétaire du véhicule.​<br>
+                            Un sinistre total signifie que votre véhicule n’est pas réparable ou que le montant des réparations approche la valeur du véhicule à dire d’expert (VRADE).​
+                            <br><br>
+                            Note : si le véhicule est en procédure VGE (Véhicule Gravement Endommagé), et réparable,​ vous-même ou votre assurance devez procéder au suivi des réparations 
+                            et nous transmettre impérativement le second rapport d’expertise qui autorise la remise en circulation du véhicule.​​
+                            <br><br>
+                            En cas de sinistre total, vous devez adresser dans les plus brefs délais les documents ci-dessous au service sinistres de BMW Financial Services par e-mail :
+                            <br><br>
+                            • Le rapport d'expertise ou chiffrage<br>
+                            • Les coordonnées complètes de votre assurance (mail + tel)<br>
+                            • Le numéro de sinistre<br>
+                            • La copie du certificat d’immatriculation ou copie de la déclaration de vol de la carte grise (CERFA)
+                        </Paragraph>
+                        <Paragraph>
+                            BMW Financial Services communiquera le capital restant dû au jour du sinistre à votre assurance et à vous-même.
+                            <br><br>
+                            • BMW Financial Services transmettra la carte grise originale (sauf Crédit) et la cession à votre assurance.
+                        </Paragraph>
+                        <MailButton href="mailto:contact-finance@bmw.fr">
+                            contact-finance@bmw.fr
+                        </MailButton>
+                    </Section>
+                    <Section noBorder>
+                        <Paragraph last>
+                            A réception des éléments de cession, l’assureur procède au règlement en fonction de votre assurance (franchise, valeur à neuf, etc).​
+                            <br><br>
+                            L’indemnisation est adressée à BMW Financial Services et vient réduire ou solder le montant​ restant dû.​
+                            <br><br>
+                            Si vous avez souscrit à la Garantie Valeur à Neuf ou Perte Financière auprès de BMW Financial​
+                            <br><br>
+                            Services, à réception de l’indemnisation de votre assureur nous vous demanderons plusieurs​ éléments (en fonction de l’assurance souscrite).​
+                            <br><br>
+                            L’indemnisation est encaissée sur votre contrat de financement et, en cas de trop perçu​ (y compris les éventuels loyers), le montant excédentaire est viré sous 
+                            48 à 72h sur votre​ compte bancaire.​
+                            <br><br>
+                            Lorsque le contrat est soldé, vous recevez une attestation « dossier clos » par courrier.​
+                        </Paragraph>
+                    </Section>
+                </div>
+        </TabMenu>
+        <InfosBar slot="infos-bar">
+            <span slot="text">
+                En cas de sinistre, nous vous rappelons que le service sinistre fait le lien avec votre assureur mais qu'il vous revient, en tant qu'assuré, d'obtenir les pièces demandées.
+                <br>
+                En effet, BMW Financial Services, sans lien contractuel direct avec votre assureur, ne peut pas obtenir les pièces à votre place.
+            </span>
+        </InfosBar>
+</Page>

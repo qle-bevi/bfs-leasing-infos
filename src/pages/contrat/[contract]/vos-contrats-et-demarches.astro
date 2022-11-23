@@ -1,0 +1,204 @@
+---
+import type { Props } from "astro";
+import headerBackground from "../../../assets/images/demarches_background.jpg";
+import { contracts } from "../../../contracts";
+import type { ContractInfo } from "../../../typings";
+import PageHeader from "../../../components/PageHeader.astro";
+import Page from "../../../layouts/Page.astro";
+import Section from "../../../components/Section.astro";
+import SectionTitle from "../../../components/SectionTitle.astro";
+import Paragraph from "../../../components/Paragraph.astro";
+import InfosBar from "../../../components/InfosBar.astro";
+import Profile from "../../../components/SVG/Profile.astro";
+import AccordeonContact, { AccordeonContactProps } from "../../../components/AccordeonContact";
+
+
+export const getStaticPaths = () => {
+    return contracts.map(c => ({ params: { contract: c.path }, props: { contract: c }}))
+}
+
+interface AvantagesProps extends Props {
+    contract: ContractInfo
+}
+
+const { contract } = Astro.props as AvantagesProps;
+
+const infos: AccordeonContactProps[] = [
+    { 
+        title: "Je mets à jour mon adresse postale, email ou téléphone",
+        text: "Si vous êtes une entreprise ou un professionnel, un extrait de Kbis de moins de 3 mois vous sera demandé.",
+        contactInfos: {
+            phone: true,
+            email: true,
+            mail: true,
+            web: true
+        }
+    },
+    { 
+        title: "Je mets à jour mes coordonnées bancaires",
+        text: "Votre RIB original vous sera demandé",
+        contactInfos: {
+            email: true,
+            mail: true,
+            web: true
+        }
+    },
+    { 
+        title: "Je demande un échéancier ou d'autres documents",
+        text: "",
+        contactInfos: {
+            phone: true,
+            email: true,
+            mail: true,
+            web: true
+        }
+    },
+    { 
+        title: "Je consulte mes courriers sur la gestion de mon contrat",
+        text: "",
+        contactInfos: {
+            web: true
+        }
+    },
+    { 
+        title: "Je  modifie la date de mon prélèvement",
+        text: "Des frais intercalaires liés à ce changement seront prélevés au prorata des jours décalés.",
+        contactInfos: {
+            phone: true,
+            email: true,
+            mail: true,
+            web: true
+        }
+    },
+    { 
+        title: "Je rachète mon véhicule en cours de contrat",
+        text: "",
+        contactInfos: {
+            phone: true,
+            email: true,
+            mail: true,
+            web: true
+        }
+    },
+    { 
+        title: "Je souscris à des services ou assurances",
+        text: "",
+        contactInfos: {
+            phone: true,
+            email: true,
+            mail: true,
+        }
+    },
+    { 
+        title: "J'adresse une réclamation",
+        text: "",
+        contactInfos: {
+            phone: true,
+            email: true,
+            mail: true,
+            web: true
+        }
+    },
+    { 
+        title: "Je consulte la charte de médiation",
+        text: "",
+        contactInfos: {
+            web: true
+        }
+    },
+    { 
+        title: "Je déclare un sinistre",
+        text: "Détail de la procédure en rubrique 6",
+        contactInfos: {
+            phone: true,
+            email: true,
+            mail: true,
+        }
+    },
+]
+---
+
+<Page title="Vos contrats et demarches">
+    <PageHeader
+        slot="header"
+        imageSrc={headerBackground}
+        imageAlt="Vos contrats et demarches"
+        imagePosition="top"
+        title={contract.cosyName}
+        subTitle="Vos contrats et demarches"
+        menuUrl={`/contrat/${contract.path}`}
+    >
+        <Profile slot="icon" class="w-10 h-auto" />
+    </PageHeader>
+    <div class="lg:px-14">
+        <Paragraph>
+            Notre Centre d'Interaction Clients BMW Financial Services se tient à votre disposition pour toute question, du lundi au vendredi de 8h30 à 18h30 :
+        </Paragraph>
+        <div class="grid grid-cols-1 grid-rows-3 sm:grid-cols-3 sm:grid-rows-1 gap-1">
+            <div class="bg-bmw-light-gray text-center flex flex-col justify-start items-center py-8">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45.796 60.983" class="w-auto h-14 mb-6"><path fill="#333" d="M4.981 0A4.973 4.973 0 0 0 0 4.984V56a4.972 4.972 0 0 0 4.981 4.983h35.833A4.972 4.972 0 0 0 45.795 56V4.984A4.973 4.973 0 0 0 40.814 0Zm5.222 7.592h25.389a2.518 2.518 0 0 1 2.611 2.434v33.1a2.516 2.516 0 0 1-2.611 2.432H10.203a2.516 2.516 0 0 1-2.611-2.432v-33.1a2.518 2.518 0 0 1 2.611-2.434Zm9.253 41.883h7.417v3.618h-7.417Z"/></svg>
+                <h5 class="uppercase font-bold">
+                    Par courrier
+                </h5>
+                <p>
+                    0 969 322 039<br>
+                    (numéro non surtaxé)
+                </p>
+            </div>
+            <div class="bg-bmw-light-gray text-center flex flex-col justify-start items-center py-8">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47.149 47.149" class="w-auto h-14 mb-6"><path fill="#333" d="M23.575 0A23.575 23.575 0 1 0 47.15 23.575 23.6 23.6 0 0 0 23.575 0Zm.835 7.858a16.283 16.283 0 0 1 5.6 1.032 14.214 14.214 0 0 1 9.185 11.591c.519 3.722-.755 8.068-4.224 9.969a7.3 7.3 0 0 1-8.152-.737 6.83 6.83 0 0 1-7.468 1.228c-4.433-2.111-5.243-8.328-2.7-12.328a7.256 7.256 0 0 1 9.971-2.259c.165-.154.788-1.032 1.671-.737a1.848 1.848 0 0 1 2.307 1.867c-.216 2.274-.238 4.547-.393 6.826-.062.915-.573 2.668.737 2.9 2.256.4 4.284-1.425 4.518-4.075a10.689 10.689 0 0 0-5.6-10.462 13.766 13.766 0 0 0-13.949 1.572c-4.963 3.956-5.743 11.907-1.914 16.846 3.52 4.647 10.728 5.762 15.666 2.8l1.917 2.947a12.546 12.546 0 0 1-3.094 1.719 15.59 15.59 0 0 1-18.074-5.943 16.061 16.061 0 0 1-1.032-15.52 16.62 16.62 0 0 1 15.03-9.233Zm-1.326 10.61a3.06 3.06 0 0 0-.932.1c-3.031.789-4.048 4.351-3.144 7.121a3.945 3.945 0 0 0 5.008 2.456c2.435-.721 3.148-3.337 2.8-5.794a4.946 4.946 0 0 0-1.328-2.849 3.712 3.712 0 0 0-2.406-1.031Z"/></svg>            
+                <h5 class="uppercase font-bold">
+                    Par email
+                </h5>
+                <p>
+                    contact-finance@bmw.fr
+                </p>
+            </div>
+            <div class="bg-bmw-light-gray text-center flex flex-col justify-start items-center py-8">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53.662 34.932" class="w-auto h-14 mb-6"><path fill="#333" d="m2.24 0 21 19.419a10.67 10.67 0 0 0 1.838 1.436 3.6 3.6 0 0 0 1.752.518 3.706 3.706 0 0 0 1.782-.518 10.559 10.559 0 0 0 1.81-1.436L51.422 0H2.24ZM0 1.867V32.95l17.667-14.823L0 1.867Zm53.662 0-17.639 16.26L53.662 32.95Zm-33.9 18.27L2.153 34.932h49.355L33.926 20.137 32.289 21.6a12.14 12.14 0 0 1-2.3 1.752 6.05 6.05 0 0 1-6.32 0 12.108 12.108 0 0 1-2.3-1.752Z"/></svg>          
+                <h5 class="uppercase font-bold">
+                    Par courrier
+                </h5>
+                <p>
+                    BMW Financial Services
+                    <br>
+                    Centre de Relation Client
+                    <br>
+                    5 rue des Hérons - CS 20750
+                    <br>
+                    78 182 Saint-Quentin-En-Yveline
+                </p>
+            </div>
+        </div>
+    </div>
+    <Section>
+        <SectionTitle>VOTRE ESPACE CLIENT My BMW Financial Services.</SectionTitle>
+        <Paragraph last>
+            En vous connectant sur votre espace client sécurisé​ MyBMW Financial Services www.BMW.fr/MyFi, vous pouvez :​
+
+            • mettre à jour vos données personnelles​ (changement de RIB, adresse, téléphone…),​
+
+            • visualiser vos courriers adresses par BMW Financial Services,​
+
+            • vous informer sur la fi n de votre contrat,​
+
+            • profiter de bien d’autres avantages.​
+
+        </Paragraph>
+    </Section>
+    <Section>
+        <SectionTitle>Pour mettre à jour vos coordonnées ou effectuer 
+            un changement sur votre contrat.</SectionTitle>
+        { infos.map(props => (<AccordeonContact client:visible {...props} />)) }
+    </Section>
+    <div class="mt-6 text-sm">
+        <span class="text-sm ">
+            *Accessible pour les particuliers et les professionnels (artisans, commerçants, professions libérales) uniquement, hors flottes.
+        </span>
+    </div>
+    <InfosBar slot="infos-bar">
+        <span slot="text">
+            N’oubliez pas de préciser votre <span class="font-bold">numéro de contrat</span> pour chacune de vos demandes.
+        </span>
+    </InfosBar>
+</Page>

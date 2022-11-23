@@ -1,0 +1,86 @@
+---
+import type { Props } from "astro";
+import type { ContractInfo } from "../../../typings";
+import { contracts } from "../../../contracts";
+import Page from "../../../layouts/Page.astro";
+import servicesBackground from "../../../assets/images/services_background.jpg";
+import PageHeader from "../../../components/PageHeader.astro";
+import GearIcon from "../../../components/SVG/GearIcon.astro";
+import Section from "../../../components/Section.astro";
+import SectionTitle from "../../../components/SectionTitle.astro";
+import Paragraph from "../../../components/Paragraph.astro";
+import ServicesAccordeon from "../../../components/pages/Services/ServicesAccordeonList";
+import peopleSmileImg from "../../../assets/images/people_smile.jpg";
+import { Picture } from "@astrojs/image/components";
+import SpeedMeters from "../../../components/pages/Services/SpeedMeters";
+
+export const getStaticPaths = () => {
+    return contracts.map(c => ({ params: { contract: c.path }, props: { contract: c }}))
+}
+
+interface AvantagesProps extends Props {
+    contract: ContractInfo
+}
+
+const { contract } = Astro.props as AvantagesProps;
+
+const item = {
+    title: SectionTitle
+}
+---
+
+<Page title="Vos services">
+    <PageHeader
+        slot="header"
+        imageSrc={servicesBackground}
+        imageAlt="Vos services"
+        title={contract.cosyName}
+        subTitle="Vos services"
+        menuUrl={`/contrat/${contract.path}`}
+    >
+        <GearIcon slot="icon" class="w-8 h-auto" />
+    </PageHeader>
+    <Section>
+        <SectionTitle>
+            L'entretien* de votre BMW.
+            <span slot="subtitle">Profitez de votre bmw en toute sérénité.</span>
+        </SectionTitle>
+        <Paragraph>
+            Si vous avez souscrit à un contrat BMW Service, dans les 3 mois suivant le début de votre contrat, vous avez le possibilité de choisir
+            la ou les formules qui vous correspondent le mieux.
+        </Paragraph>
+        <Paragraph>
+            Choisissez parmi nos 2 formules d'entretien constructeur, Contrat d'Entretien et Contrat d'Entretien Maintenance (le dernier incluant
+            les pièces d'usure) et bénéficiez des 4 avantages suivants :
+        </Paragraph>
+        <ServicesAccordeon client:visible />
+        <Paragraph>
+            Le contrat de garantie constructeur étendue BMW Service est compris dans votre contrat BMW Financial Services pour les véhicules neufs.
+        </Paragraph>
+    </Section>
+    <Section noBorder>
+        <div class="flex flex-col md:flex-row items-stretch space-y-8 md:space-x-8 md:space-y-0">
+            <div class="flex-1 flex flex-col">
+                <SectionTitle>
+                    La protection personnelle DI+*.
+                    <span slot="subtitle">protégez vos intérêts et ceux de vos proches en cas de décès.</span>
+                </SectionTitle>
+                <Paragraph>
+                    Si vous avez souscrit à l'assurance <span class="font-bold">Décès-Perte Totale et Irréversible d'Autonomie (DI+)</span>,
+                    celle-ci est la solution qui veille sur vous et votre famille, en cas d'accident de la vie.
+                    Elle protège vos proches en leur laissant la jouissance de votre BMW en les dégageant
+                    intégralement du financement que vous aurez engagé.
+                </Paragraph>
+                <SpeedMeters client:visible />
+            </div>
+            <Picture
+                src={peopleSmileImg}
+                fill="cover"
+                alt="couple qui sourit"
+                sizes="(min-width: 768px) 40vw, 100vw"
+                widths={[400, 500, 690]}
+                aspectRatio="690:553"
+            />
+        </div>
+    </Section>
+</Page>
