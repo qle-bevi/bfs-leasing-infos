@@ -3,6 +3,7 @@ import type { Props } from "astro";
 import { contracts } from "../../../contracts";
 import Page from "../../../layouts/Page.astro";
 import headerBackground from "../../../assets/images/fin_de_contrat_background.jpg";
+import headerBackgroundMobile from "../../../assets/images/fin_de_contrat_background_mobile.jpg";
 import PageHeader from "../../../components/PageHeader.astro";
 import AdvantagesList from "../../../components/pages/EndOfContract/AdvantagesList";
 import type { ContractInfo } from "../../../typings";
@@ -21,10 +22,13 @@ const { contract } = Astro.props as AvantagesProps;
 
 ---
 
-<Page title="La fin de votre contrat">
+<Page title="La fin de votre contrat" contract={contract} nextPage={{ name: "En cas de sinistre", href: `/contrat/${contract.path}/en-cas-de-sinistre`}}>
     <PageHeader
         slot="header"
+        contract={contract}
+        currentUrl={`/contrat/${contract.path}/la-fin-de-votre-contrat`}
         imageSrc={headerBackground}
+        mobileImageSrc={headerBackgroundMobile}
         imageAlt="La fin de votre contrat"
         title={contract.cosyName}
         subTitle="La fin de votre contrat"

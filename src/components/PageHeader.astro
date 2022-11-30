@@ -1,10 +1,17 @@
 ---
 import { Picture } from "@astrojs/image/components";
-import MenuButton from "./MenuButton.astro";
+import clsx from "clsx";
+import type { ContractInfo } from "../typings";
+import MenuButton from "./MenuButton";
 import BmwLogo from "./SVG/BmwLogo.astro";
 
 type PageHeaderProps = {
+    mobileOnly?: boolean,
+    noMenuButton?: boolean,
+    contract: ContractInfo,
+    currentUrl: string,
     imageSrc: ImageMetadata,
+    mobileImageSrc: ImageMetadata,
     imageAlt: string,
     imagePosition: string,
     title: string,
@@ -12,30 +19,49 @@ type PageHeaderProps = {
     menuUrl: string
 }
 
-const { imageSrc, imageAlt = "", imagePosition = "center", title, subTitle, menuUrl } = Astro.props as PageHeaderProps;
+const { mobileOnly = false, noMenuButton = false, contract, currentUrl, imageSrc, mobileImageSrc, imageAlt = "", imagePosition = "center", title, subTitle, menuUrl } = Astro.props as PageHeaderProps;
 ---
 
-<header class="relative bg-bmw-blue w-full h-64 overflow-hidden">
-    <Picture
+<header
+    class={
+        clsx(
+            { "h-72 sm:hidden": mobileOnly },
+            "relative bg-bmw-blue w-full sm:h-64",
+        )
+    }
+    >
+    { !mobileOnly && <Picture
         src={imageSrc}
         position={imagePosition}
-        class="absolute inset-0 w-full h-64 object-cover object-top z-0"
+        class="hidden sm:block absolute inset-0 w-full h-64 object-cover object-top z-0"
         alt={imageAlt}
+        width="100vw"
         widths={[800, 1280, 1920]}
-        sizes=""
+        sizes="100vw"
+        formats={["jpeg"]}
+    /> }
+    <Picture
+        src={mobileImageSrc}
+        position={imagePosition}
+        class="sm:hidden absolute inset-0 w-full h-72 object-cover object-top z-0"
+        alt={imageAlt}
+        width="100vw"
+        widths={[300, 400, 600]}
+        sizes="100vw"
         formats={["jpeg"]}
     />
-    <div class="bg-gradient-to-bl from-transparent via-black/30 to-black/75 absolute inset-0 h-64 z-10"></div>
-    <h1 class="absolute top-10 left-6 md:left-12 text-white text-2xl font-bold text-shadow-xl z-20">BMW Financial Services</h1>
-    <div class="absolute top-8 right-6 md:right-12 flex flex-row items-center space-x-2 md:space-x-4 lg:space-x-8 z-20">
-        <MenuButton href={menuUrl} />
-        <BmwLogo class="w-16 h-auto" />
+    <div class="bg-gradient-to-t sm:bg-gradient-to-bl from-transparent via-black/30 to-black absolute inset-0 h-64 z-10"></div>
+    <h1 class="hidden sm:block absolute top-10 left-6 sm:left-12 text-white text-2xl font-bold text-shadow-xl z-20">BMW Financial Services</h1>
+    <div class="absolute top-8 left-6 sm:left-auto right-6 sm:right-12 flex flex-row justify-between sm:justify-start md:items-center space-x-2 md:space-x-4 lg:space-x-8 z-50">
+        { !noMenuButton && <MenuButton contract={contract} currentUrl={currentUrl} client:load /> }
+        { !noMenuButton && <div />}
+        <BmwLogo class="w-14 md:w-16 h-auto" />
     </div>
-    <div class="absolute bottom-8 left-6 md:left-12 right-12 flex flex-row items-end space-x-5 text-white z-20">
+    { !mobileOnly && <div class="relative bg-bmw-very-light-gray sm:bg-transparent px-6 sm:px-0 py-6 sm:py-0 mt-72 sm:mt-0 sm:absolute sm:bottom-8 sm:left-6 md:left-12 sm:right-12 flex flex-row items-end space-x-5 text-bmw-blue sm:text-white z-20">
         <slot name="icon" />
-        <div class="flex-1 flex flex-col leading-tight uppercase">
+        <div class="flex-1 flex flex-col leading-tight uppercase font-bold">
             <h2 class="text-lg text-bmw-blue">{ title }</h2>
-            <h3 class="text-xl font-bold">{ subTitle }</h3>
+            <h3 class="text-xl font-bold text-black sm:text-inherit">{ subTitle }</h3>
         </div>
-    </div>
+    </div> }
 </header>

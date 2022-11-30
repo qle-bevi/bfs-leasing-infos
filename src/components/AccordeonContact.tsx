@@ -97,7 +97,7 @@ const AccordeonContact = ({
   } = contactInfos
 
   return (
-    <div className="mb-4">
+    <div className="relative z-10 mb-4">
       <a href="#" onClick={
         (ev) => {
           ev.preventDefault()
@@ -105,12 +105,12 @@ const AccordeonContact = ({
         }}
       >
         <div className={clsx(
-          'relative px-4 lg:px-8 py-4  text-lg',
+          'relative pr-20 pb-8 sm:pb-4 sm:pr-4 px-4 lg:px-8 py-4 text-lg',
           { 'bg-bmw-blue text-white': isOpen },
           { 'bg-bmw-light-gray': !isOpen }
         )}>
           { title }
-          <motion.div variants={VARIANTS.chevron} initial="close" animate={isOpen ? 'open' : 'close'} className="absolute top-0 right-12 bottom-0 flex justify-center items-center">
+          <motion.div variants={VARIANTS.chevron} initial="close" animate={isOpen ? 'open' : 'close'} className="absolute sm:top-4 right-4 sm:right-12 bottom-4 flex justify-center items-end sm:items-center">
             <svg
               viewBox="0 0 49.468 28.879"
               className='w-8 h-auto'
@@ -132,8 +132,8 @@ const AccordeonContact = ({
               animate={isOpen ? 'open' : 'close'}
               exit="close"
             >
-              <div className="py-4 bg-white flex flex-row items-end">
-                <motion.div variants={VARIANTS.iconsContainer} className="px-4 lg:px-8 flex flex-row items-end space-x-6">
+              <div className="py-4 bg-white flex flex-col space-y-4 m:space-y-0 sm:flex-row items-end">
+                <motion.div variants={VARIANTS.iconsContainer} className="w-full sm:w-auto px-4 justify-between lg:px-8 flex flex-row items-end sm:space-x-6">
                   <div className='w-6 h-auto'>
                     { phone && <motion.svg variants={VARIANTS.icons} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25.001 25" className='w-6 h-auto' opacity={phone ? '1' : '0'}>
                       <path id="Tracé_99" data-name="Tracé 99" d="M65.12,56.994a1.928,1.928,0,0,0-1.275.513,28.809,28.809,0,0,0-2.461,2.3,4.488,4.488,0,0,0-1.009,3.949c.784,4.125,3.894,8.23,6.887,11.225.006.006.011-.007.018,0s-.007.011,0,.018c2.993,3,7.084,6.119,11.208,6.906a4.558,4.558,0,0,0,3.984-.992,29.718,29.718,0,0,0,2.319-2.532,1.618,1.618,0,0,0-.071-2.408,37.1,37.1,0,0,0-4.763-3.364,1.457,1.457,0,0,0-2.213.443,14.862,14.862,0,0,0-1.257,2.426c-.222.609-.66.734-1.328.407a24.7,24.7,0,0,1-4.9-3.825l-.018-.018c-.006-.006-.029.007-.036,0A24.73,24.73,0,0,1,66.4,67.121c-.327-.669-.219-1.123.389-1.346a15.143,15.143,0,0,0,2.444-1.257,1.435,1.435,0,0,0,.425-2.2,37.556,37.556,0,0,0-3.4-4.745A1.959,1.959,0,0,0,65.12,56.994Z" transform="translate(-60.29 -56.994)" fill="#333"/>
@@ -158,7 +158,7 @@ const AccordeonContact = ({
                     </motion.svg> }
                   </div>
                 </motion.div>
-                <motion.div variants={VARIANTS.text} className="pr-4 lg:pr-8 flex-1">
+                <motion.div variants={VARIANTS.text} className="w-full sm:w-auto px-4 sm:px-0 pr-4 lg:pr-8 flex-1">
                   { text }
                 </motion.div>
               </div>

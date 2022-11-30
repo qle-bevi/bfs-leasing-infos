@@ -11,7 +11,8 @@ module.exports = {
       colors: {
         'bmw-gray': '#707070',
         'bmw-blue': '#0066B1',
-        'bmw-light-gray': '#B3B3B3'
+        'bmw-light-gray': '#B3B3B3',
+        'bmw-very-light-gray': '#E7E6E6'
       }
     }
   },

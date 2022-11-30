@@ -3,6 +3,7 @@ import type { Props } from "astro";
 import DocCheck from "../../../components/SVG/DocCheck.astro";
 import TabMenu from "../../../components/TabMenu";
 import sinistreBackground from "../../../assets/images/sinistre_background.jpg";
+import sinistreBackgroundMobile from "../../../assets/images/sinistre_background_mobile.jpg";
 import { contracts } from "../../../contracts";
 import type { ContractInfo } from "../../../typings";
 import PageHeader from "../../../components/PageHeader.astro";
@@ -25,10 +26,13 @@ interface AvantagesProps extends Props {
 const { contract } = Astro.props as AvantagesProps;
 ---
 
-<Page title="En cas de sinistre">
+<Page title="En cas de sinistre" contract={contract}>
     <PageHeader
         slot="header"
+        contract={contract}
+        currentUrl={`/contrat/${contract.path}/en-cas-de-sinistre`}
         imageSrc={sinistreBackground}
+        mobileImageSrc={sinistreBackgroundMobile}
         imageAlt="En cas de sinistre"
         imagePosition="top"
         title={contract.cosyName}

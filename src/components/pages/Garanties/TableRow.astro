@@ -11,11 +11,11 @@ const { noBorder = false } = Astro.props as TableRowProps;
 
 <tr 
     class={
-        clsx({
+        clsx("text-xs sm:text-normal", {
             "border-b border-b-bmw-gray/20": !noBorder
         })
     }>
-    <td class="text-center px-18 py-8">
+    <td class="text-center px-0 sm:px-18 py-8">
         <slot name="text" />
     </td>
     <td class="bg-[#EEEEEE] border-l border-l-white">
@@ -29,7 +29,7 @@ const { noBorder = false } = Astro.props as TableRowProps;
         </div>
     </td>
     <td class="bg-[#B2D1E7] border-l border-l-white py-4">
-        <div class="w-full h-full flex justify-center items-center">
+        <div class="w-full h-full flex justify-center items-center text-center">
             <slot name="GPF" />
             <stot name="GPF_TEXT" />
         </div>

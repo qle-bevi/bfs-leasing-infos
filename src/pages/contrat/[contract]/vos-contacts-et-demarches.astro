@@ -1,6 +1,9 @@
 ---
 import type { Props } from "astro";
+import { Picture } from "@astrojs/image/components";
+import espaceClientImg from "../../../assets/images/espace_client.jpg";
 import headerBackground from "../../../assets/images/demarches_background.jpg";
+import headerBackgroundMobile from "../../../assets/images/demarches_background_mobile.jpg";
 import { contracts } from "../../../contracts";
 import type { ContractInfo } from "../../../typings";
 import PageHeader from "../../../components/PageHeader.astro";
@@ -108,7 +111,7 @@ const infos: AccordeonContactProps[] = [
     },
     { 
         title: "Je déclare un sinistre",
-        text: "Détail de la procédure en rubrique 6",
+        text: "Détail de la procédure dans la rubrique « en cas de sinistre ».",
         contactInfos: {
             phone: true,
             email: true,
@@ -118,14 +121,17 @@ const infos: AccordeonContactProps[] = [
 ]
 ---
 
-<Page title="Vos contrats et demarches">
+<Page title="Vos contacts et demarches" contract={contract} nextPage={{ name: "Rachat de votre véhicule en cours de contrat", href: `/contrat/${contract.path}/rachat-de-votre-vehicule-en-cours-de-contrat`}}>
     <PageHeader
         slot="header"
+        contract={contract}
+        currentUrl={`/contrat/${contract.path}/vos-contacts-et-demarches`}
         imageSrc={headerBackground}
-        imageAlt="Vos contrats et demarches"
+        mobileImageSrc={headerBackgroundMobile}
+        imageAlt="Vos contacts et demarches"
         imagePosition="top"
         title={contract.cosyName}
-        subTitle="Vos contrats et demarches"
+        subTitle="Vos contacts et demarches"
         menuUrl={`/contrat/${contract.path}`}
     >
         <Profile slot="icon" class="w-10 h-auto" />
@@ -135,7 +141,7 @@ const infos: AccordeonContactProps[] = [
             Notre Centre d'Interaction Clients BMW Financial Services se tient à votre disposition pour toute question, du lundi au vendredi de 8h30 à 18h30 :
         </Paragraph>
         <div class="grid grid-cols-1 grid-rows-3 sm:grid-cols-3 sm:grid-rows-1 gap-1">
-            <div class="bg-bmw-light-gray text-center flex flex-col justify-start items-center py-8">
+            <div class="bg-bmw-very-light-gray text-center flex flex-col justify-start items-center py-8">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45.796 60.983" class="w-auto h-14 mb-6"><path fill="#333" d="M4.981 0A4.973 4.973 0 0 0 0 4.984V56a4.972 4.972 0 0 0 4.981 4.983h35.833A4.972 4.972 0 0 0 45.795 56V4.984A4.973 4.973 0 0 0 40.814 0Zm5.222 7.592h25.389a2.518 2.518 0 0 1 2.611 2.434v33.1a2.516 2.516 0 0 1-2.611 2.432H10.203a2.516 2.516 0 0 1-2.611-2.432v-33.1a2.518 2.518 0 0 1 2.611-2.434Zm9.253 41.883h7.417v3.618h-7.417Z"/></svg>
                 <h5 class="uppercase font-bold">
                     Par courrier
@@ -145,7 +151,7 @@ const infos: AccordeonContactProps[] = [
                     (numéro non surtaxé)
                 </p>
             </div>
-            <div class="bg-bmw-light-gray text-center flex flex-col justify-start items-center py-8">
+            <div class="bg-bmw-very-light-gray text-center flex flex-col justify-start items-center py-8">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47.149 47.149" class="w-auto h-14 mb-6"><path fill="#333" d="M23.575 0A23.575 23.575 0 1 0 47.15 23.575 23.6 23.6 0 0 0 23.575 0Zm.835 7.858a16.283 16.283 0 0 1 5.6 1.032 14.214 14.214 0 0 1 9.185 11.591c.519 3.722-.755 8.068-4.224 9.969a7.3 7.3 0 0 1-8.152-.737 6.83 6.83 0 0 1-7.468 1.228c-4.433-2.111-5.243-8.328-2.7-12.328a7.256 7.256 0 0 1 9.971-2.259c.165-.154.788-1.032 1.671-.737a1.848 1.848 0 0 1 2.307 1.867c-.216 2.274-.238 4.547-.393 6.826-.062.915-.573 2.668.737 2.9 2.256.4 4.284-1.425 4.518-4.075a10.689 10.689 0 0 0-5.6-10.462 13.766 13.766 0 0 0-13.949 1.572c-4.963 3.956-5.743 11.907-1.914 16.846 3.52 4.647 10.728 5.762 15.666 2.8l1.917 2.947a12.546 12.546 0 0 1-3.094 1.719 15.59 15.59 0 0 1-18.074-5.943 16.061 16.061 0 0 1-1.032-15.52 16.62 16.62 0 0 1 15.03-9.233Zm-1.326 10.61a3.06 3.06 0 0 0-.932.1c-3.031.789-4.048 4.351-3.144 7.121a3.945 3.945 0 0 0 5.008 2.456c2.435-.721 3.148-3.337 2.8-5.794a4.946 4.946 0 0 0-1.328-2.849 3.712 3.712 0 0 0-2.406-1.031Z"/></svg>            
                 <h5 class="uppercase font-bold">
                     Par email
@@ -154,7 +160,7 @@ const infos: AccordeonContactProps[] = [
                     contact-finance@bmw.fr
                 </p>
             </div>
-            <div class="bg-bmw-light-gray text-center flex flex-col justify-start items-center py-8">
+            <div class="bg-bmw-very-light-gray text-center flex flex-col justify-start items-center py-8">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53.662 34.932" class="w-auto h-14 mb-6"><path fill="#333" d="m2.24 0 21 19.419a10.67 10.67 0 0 0 1.838 1.436 3.6 3.6 0 0 0 1.752.518 3.706 3.706 0 0 0 1.782-.518 10.559 10.559 0 0 0 1.81-1.436L51.422 0H2.24ZM0 1.867V32.95l17.667-14.823L0 1.867Zm53.662 0-17.639 16.26L53.662 32.95Zm-33.9 18.27L2.153 34.932h49.355L33.926 20.137 32.289 21.6a12.14 12.14 0 0 1-2.3 1.752 6.05 6.05 0 0 1-6.32 0 12.108 12.108 0 0 1-2.3-1.752Z"/></svg>          
                 <h5 class="uppercase font-bold">
                     Par courrier
@@ -172,19 +178,32 @@ const infos: AccordeonContactProps[] = [
         </div>
     </div>
     <Section>
-        <SectionTitle>VOTRE ESPACE CLIENT My BMW Financial Services.</SectionTitle>
-        <Paragraph last>
-            En vous connectant sur votre espace client sécurisé​ MyBMW Financial Services www.BMW.fr/MyFi, vous pouvez :​
+        <div class="flex flex-col md:flex-row items-stretch space-y-8 md:space-x-8 md:space-y-0">
+            <div class="flex-1 flex flex-col">
+                <SectionTitle>VOTRE ESPACE CLIENT My BMW Financial Services.</SectionTitle>
+                <Paragraph last>
+                    En vous connectant sur votre espace client sécurisé​ MyBMW Financial Services www.BMW.fr/MyFi, vous pouvez :​
+                    <br><br>
+                    • mettre à jour vos données personnelles​ (changement de RIB, adresse, téléphone…),​
+                    <br><br>
+                    • visualiser vos courriers adresses par BMW Financial Services,​
+                    <br><br>
+                    • vous informer sur la fin de votre contrat,​
+                    <br><br>
+                    • profiter de bien d’autres avantages.​
 
-            • mettre à jour vos données personnelles​ (changement de RIB, adresse, téléphone…),​
-
-            • visualiser vos courriers adresses par BMW Financial Services,​
-
-            • vous informer sur la fi n de votre contrat,​
-
-            • profiter de bien d’autres avantages.​
-
-        </Paragraph>
+                </Paragraph>
+            </div>
+            <Picture
+                src={espaceClientImg}
+                fill="cover"
+                alt="Espace client"
+                sizes="(min-width: 768px) 25vw, 100vw"
+                widths={[420, 520, 720]}
+                aspectRatio="472:351"
+            />
+        </div>
+        
     </Section>
     <Section>
         <SectionTitle>Pour mettre à jour vos coordonnées ou effectuer 

@@ -3,6 +3,7 @@ import type { Props } from "astro";
 import { contracts } from "../../../contracts";
 import Page from "../../../layouts/Page.astro";
 import headerBackground from "../../../assets/images/rachat_background.jpg";
+import headerBackgroundMobile from "../../../assets/images/rachat_background_mobile.jpg";
 import PageHeader from "../../../components/PageHeader.astro";
 import AdvantagesList from "../../../components/pages/EndOfContract/AdvantagesList";
 import type { ContractInfo } from "../../../typings";
@@ -22,10 +23,13 @@ const { contract } = Astro.props as AvantagesProps;
 
 ---
 
-<Page title="Rachat de votre véhicule en cours de contrat">
+<Page title="Rachat de votre véhicule en cours de contrat" contract={contract} nextPage={{ name: "La fin de votre contrat", href: `/contrat/${contract.path}/la-fin-de-votre-contrat`}}>
     <PageHeader
         slot="header"
+        contract={contract}
+        currentUrl={`/contrat/${contract.path}/rachat-de-votre-vehicule-en-cours-de-contrat`}
         imageSrc={headerBackground}
+        mobileImageSrc={headerBackgroundMobile}
         imageAlt="Rachat de votre véhicule en cours de contrat"
         title={contract.cosyName}
         subTitle="Rachat de votre véhicule en cours de contrat"

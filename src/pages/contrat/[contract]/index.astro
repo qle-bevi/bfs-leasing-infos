@@ -2,10 +2,11 @@
 import { contracts } from "../../../contracts";
 import Layout from "../../../layouts/Layout.astro";
 import MenuBackground from "../../../assets/images/menu_background.jpg";
+import mobileHeader from "../../../assets/images/contract_menu_background_mobile.jpg";
 import PageBackgroundImage from "../../../components/PageBackgroundImage.astro";
 import BmwLogo from "../../../components/SVG/BmwLogo.astro";
 import Footer from "../../../components/Footer.astro";
-import BurgerMenuButton from "../../../components/MenuButton.astro";
+import BurgerMenuButton from "../../../components/MenuButton";
 import MenuButton from "../../../components/pages/Menu/MenuButton.astro";
 import ThumbsUp from "../../../components/SVG/ThumbsUp.astro";
 import GearIcon from "../../../components/SVG/GearIcon.astro";
@@ -15,7 +16,8 @@ import Profile from "../../../components/SVG/Profile.astro";
 import Car from "../../../components/SVG/Car.astro";
 import Calendar from "../../../components/Calendar.astro";
 import DocCheck from "../../../components/SVG/DocCheck.astro";
-import Burger from "../../../components/SVG/Burger.astro";
+import { motion } from "framer-motion";
+import PageHeader from "../../../components/PageHeader.astro";
 
 
 export const getStaticPaths = () => {
@@ -29,23 +31,32 @@ const contract = contracts.find((c) => c.path === contractPath)!;
 
 <Layout title={`BMW Financial Services / contrat ${contract.name}`}>
     <PageBackgroundImage imageSrc={MenuBackground}>
-        <div class="flex w-full h-full flex-col overflow-hidden">
-            <div class="flex flex-col items-center flex-grow px-12 pb-6 overflow-auto">
-                <header class="w-full pt-8 pb-4 flex flex-row justify-between items-center border-b border-white">
+        <div class="w-full h-full overflow-hidden bg-bmw-gray sm:flex sm:flex-col sm:bg-transparent">
+            <div class="w-full h-full items-center flex flex-col flex-grow sm:px-12 sm:pb-6 overflow-auto">
+                <div class="w-full sm:hidden">
+                    <PageHeader
+                        mobileOnly
+                        mobileImageSrc={mobileHeader}
+                        contract={contract}
+                        currentUrl={`/contrat/${contract.path}`}
+                    />
+                </div>
+                <header class="hidden sm:flex w-full pt-8 pb-4 flex-row justify-between items-center border-b border-white">
                     <h1 class="text-white text-2xl font-bold text-shadow-xl">BMW Financial Services</h1>
-                    <div class="flex flex-row items-center space-x-8">
-                        <BurgerMenuButton href="/" />
-                        <BmwLogo class="w-16 h-auto" />
+                    <div class="flex flex-row items-center">
+                        <BurgerMenuButton contract={contract} currentUrl={`/contrat/${contract.path}`} client:load />
+                        <BmwLogo class="ml-8 w-16 h-auto" />
                     </div>
                 </header>
-                <h2 class="text-white text-3xl font-light uppercase text-center my-6">
+                
+                <h2 class="text-black sm:text-white text-3xl font-light uppercase text-center pb-6 sm:pb-0 border-b sm:border-b-0 border-b-black my-6 mx-6 sm:mx-0 sm:px-6">
                     vos informations pratiques sur votre <span class="font-bold">{contract.cosyName}</span>
                 </h2>
-                <div class="w-full max-w-5xl flex-1 grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="w-full max-w-5xl flex-grow grid grid-cols-2 lg:grid-cols-4 gap-4 px-6 sm:px-0">
                     <MenuButton href={`/contrat/${contract.path}/vos-avantages`}>
                         <ThumbsUp slot="icon" class="w-14 h-auto" />
                         <span slot="text">
-                            Les avantages <br> de votre contract
+                            Les avantages <br> de votre contrat
                         </span>
                     </MenuButton>
                     <MenuButton href={`/contrat/${contract.path}/vos-services`}>
@@ -60,16 +71,16 @@ const contract = contracts.find((c) => c.path === contractPath)!;
                             Vos garanties
                         </span>
                     </MenuButton>
-                    <MenuButton>
+                    <MenuButton href={`/contrat/${contract.path}/vos-options`}>
                         <Options slot="icon" class="w-16 h-auto" />
                         <span slot="text">
                             Vos options
                         </span>
                     </MenuButton>
-                    <MenuButton href={`/contrat/${contract.path}/vos-contrats-et-demarches`}>
+                    <MenuButton href={`/contrat/${contract.path}/vos-contacts-et-demarches`}>
                         <Profile slot="icon" class="w-14 h-auto" />
                         <span slot="text">
-                            Vos contrats<br>et démarches
+                            Vos contacts<br>et démarches
                         </span>
                     </MenuButton>
                     <MenuButton href={`/contrat/${contract.path}/rachat-de-votre-vehicule-en-cours-de-contrat`}>
@@ -91,8 +102,13 @@ const contract = contracts.find((c) => c.path === contractPath)!;
                         </span>
                     </MenuButton>
                 </div>
+                <div class="sm:hidden w-full mt-6">
+                    <Footer />
+                </div>
             </div>
-            <Footer />
+            <div class="hidden sm:block w-full">
+                <Footer />
+            </div>
         </div>
     </PageBackgroundImage>
 </Layout>

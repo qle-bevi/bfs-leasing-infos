@@ -46,18 +46,18 @@ const Key = (props: SVGProps<SVGSVGElement>) => (
 const AdvantagesList = (): JSX.Element => {
   return (
         <BenefitsList>
-            <BenefitsList.Item theme='gray' icon={(<Meter className="w-16 h-auto" />)}>
+            <BenefitsList.Item theme='gray' icon={(<Meter className="w-8 sm:w-16 h-auto" />)}>
                 <span slot="text">
                     Vos loyers sont calculés &quot;sur-mesure&quot; en fonction de l&apos;apport,
                     la durée et des services associés.
                 </span>
             </BenefitsList.Item>
-            <BenefitsList.Item theme='primary' icon={(<Clock className="w-16 h-auto" />)}>
+            <BenefitsList.Item theme='primary' icon={(<Clock className="w-8 sm:w-16 h-auto" />)}>
                 <span slot="text">
                     Une location avec un <span className="font-bold">kilométrage illimité</span> permettant une grande <span className="font-bold">fléxibilité.</span>
                 </span>
             </BenefitsList.Item>
-            <BenefitsList.Item theme='light-gray' icon={(<Key className="w-16 h-auto" />)}>
+            <BenefitsList.Item theme='light-gray' icon={(<Key className="w-8 sm:w-16 h-auto" />)}>
                 <span slot="text">
                   Un montage financier qui vous donne la possibilité, sous 
                   conditions, <span className='font-bold'>de devenir propriétaire de votre véhicule à partir du

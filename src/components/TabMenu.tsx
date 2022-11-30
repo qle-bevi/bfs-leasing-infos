@@ -74,8 +74,8 @@ const TabMenu = ({
   const slots = keys.map(k => ({ element: props[k] ?? null, key: k }))
 
   return (
-    <div>
-      <div className="flex flex-row lg:px-14">
+    <div className="relative z-10">
+      <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-1 lg:px-14">
         { items.map((item) => (
           <a
             href="#"
@@ -86,14 +86,14 @@ const TabMenu = ({
             }}
             className={
               clsx(
-                'relative cursor-pointer flex-1 flex justify-center items-center text-center uppercase text-lg py-4 transition-colors',
+                'relative cursor-pointer flex-1 flex justify-start px-4 sm:px-0 sm:justify-center items-center text-center uppercase text-lg py-4 transition-colors',
                 { 'bg-bmw-blue text-white': activeKey === item.key },
                 { 'bg-bmw-light-gray text-bmw-gray': activeKey !== item.key }
               )
             }
           >
             {item.title}
-            <div className="absolute top-0 right-12 bottom-0 flex justify-center items-center">
+            <div className="invisible sm:visible absolute top-0 right-12 bottom-0 flex justify-center items-center">
               <motion.div
                 variants={VARIANTS.chevron}
                 initial={item.key === activeKey ? 'open' : 'close'}

@@ -1,22 +1,47 @@
 ---
 import Footer from "../components/Footer.astro";
+import type { ContractInfo } from "../typings";
 import Layout from "./Layout.astro";
+
+interface NextPage {
+    name: string,
+    href: string
+}
 
 export interface Props {
 	title: string;
+    contract: ContractInfo,
+    nextPage?: NextPage
 }
 
-const { title } = Astro.props;
+const { title, contract, nextPage = null } = Astro.props;
 ---
 
 <Layout title={title}>
     <div id="scroller" class="w-full h-full overflow-y-auto">
         <div class="w-full min-h-full flex flex-col justify-start">
             <slot name="header" />
-            <div class="flex-grow">
+            <div class="flex-grow bg-white">
                 <div class="px-6 md:px-12 py-6">
+                    <div class="mb-6 text-bmw-light-gray lg:px-14">
+                        <a class="hover:underline underline-offset-2" href="/">Accueil</a> {'>'}
+                        <a class="hover:underline underline-offset-2" href={`/contrat/${contract.path}`}>{`Sommaire ${contract.name}`}</a> {'>'}
+                        <span class="text-[#1d8ef2]">{title}</span>
+                    </div>
                     <slot />
                 </div>
+                { nextPage && (
+                    <div class="w-full py-6 flex justify-end items-center">
+                        <a href={nextPage.href} class="py-4 pl-6 pr-4 w-auto bg-[#1d8ef2] uppercase text-white inline-flex flex-row items-center space-x-4  hover:bg-bmw-blue transition-all">
+                            <span class="whitespace-nowrap">{ nextPage.name }</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.734 14.44" class="transform-gpu -rotate-90 w-6 h-auto">
+                                <g id="Fleche" transform="translate(24.734 14.44) rotate(180)">
+                                    <path id="Tracé_48" data-name="Tracé 48" d="M12.367,0,11.129,1.183,0,11.866,2.476,14.44l9.891-9.5,9.891,9.5,2.476-2.574L13.605,1.183Z" transform="translate(0 0)" fill="currentColor"/>
+                                </g>
+                            </svg>
+                        </a>
+                    </div>
+                )}
                 <slot name="infos-bar" />
             </div>
             <Footer />

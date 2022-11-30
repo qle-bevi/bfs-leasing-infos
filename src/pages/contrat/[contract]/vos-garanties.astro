@@ -2,6 +2,8 @@
 import PageHeader from "../../../components/PageHeader.astro";
 import Page from "../../../layouts/Page.astro";
 import garantiesBackground from "../../../assets/images/garanties_background.jpg";
+import garantiesBackgroundMobile from "../../../assets/images/garanties_background_mobile.jpg";
+
 import type { Props } from "astro";
 import { contracts } from "../../../contracts";
 import type { ContractInfo } from "../../../typings";
@@ -29,14 +31,17 @@ const { contract } = Astro.props as AvantagesProps;
 
 ---
 
-<Page title="Vos garanties">
+<Page title="Vos garanties" contract={contract} nextPage={{ name: "Vos options", href: `/contrat/${contract.path}/vos-options`}}>
     <PageHeader
         slot="header"
+        contract={contract}
+        currentUrl={`/contrat/${contract.path}/vos-garanties`}
         imageSrc={garantiesBackground}
+        mobileImageSrc={garantiesBackgroundMobile}
         imageAlt="Vos garanties"
         imagePosition="top"
         title={contract.cosyName}
-        subTitle="Vos services"
+        subTitle="Vos garanties"
         menuUrl={`/contrat/${contract.path}`}
     >
         <Umbrella slot="icon" class="w-8 h-auto" />
@@ -143,18 +148,18 @@ const { contract } = Astro.props as AvantagesProps;
                             • Type de financement : crédit ou LOA, apport inférieur à 20%​
                         </Paragraph>
                     </Section>
-                    <div class="px-16">
+                    <div class="sm:px-16">
                         <table class="w-full mb-10">
                             <thead>
                                 <tr>
-                                    <th></th>
-                                    <th class="text-bold text-center p-4 uppercase w-[22.7%]">
+                                    <th class="w-auto"></th>
+                                    <th class="text-xs text-bold text-center sm:p-4 uppercase w-[30%] sm:w-[22.7%]">
                                         SANS ASSURANCE
                                     </th>
-                                    <th class="text-bold text-center p-4 uppercase w-[22.7%]">
+                                    <th class="text-xs text-bold text-center sm:p-4 uppercase w-[30%] sm:w-[22.7%]">
                                         Garantie<br> PERTE FINAncière(3)
                                     </th>
-                                    <th class="text-bold text-center text-bmw-blue p-4 uppercase w-[22.7%]">
+                                    <th class="text-xs text-bold text-center text-bmw-blue sm:p-4 uppercase w-[30%] sm:w-[22.7%]">
                                         Garantie<br> valeur d'achat(1)
                                     </th>
                                 </tr>
@@ -168,9 +173,9 @@ const { contract } = Astro.props as AvantagesProps;
                                         Solde du financement et indemnité
                                         de votre assureur principal
                                     </span>
-                                    <Cross slot="WI" class="w-12 h-auto" />
-                                    <Check slot="GVA"class="w-12 h-auto" />
-                                    <Cross slot="GPF" class="w-12 h-auto" />
+                                    <Cross slot="WI" class="w-6 sm:w-12 h-auto" />
+                                    <Check slot="GVA"class="w-6 sm:w-12 h-auto" />
+                                    <Cross slot="GPF" class="w-6 sm:w-12 h-auto" />
                                 </TableRow>
                                 <TableRow>
                                     <span slot="text">
@@ -180,21 +185,21 @@ const { contract } = Astro.props as AvantagesProps;
                                         Valeur d’achat et indemnité de votre
                                         assureur principal
                                     </span>
-                                    <Cross slot="WI" class="w-12 h-auto" />
-                                    <Cross slot="GVA"class="w-12 h-auto" />
-                                    <Check slot="GPF" class="w-12 h-auto" />
+                                    <Cross slot="WI" class="w-6 sm:w-12 h-auto" />
+                                    <Cross slot="GVA"class="w-6 sm:w-12 h-auto" />
+                                    <Check slot="GPF" class="w-6 sm:w-12 h-auto" />
                                 </TableRow>
                                 <TableRow>
                                     <span slot="text">
                                         Durée de couverture de la garantie
                                     </span>
-                                    <Cross slot="WI" class="w-12 h-auto" />
+                                    <Cross slot="WI" class="w-6 sm:w-12 h-auto" />
                                     <div slot="GVA" class="flex flex-col justify-center items-center">
-                                        <Cross class="w-12 h-auto" />
+                                        <Cross class="w-6 sm:w-12 h-auto" />
                                         <span class="mt-4">Durée du financement</span>
                                     </div>
                                     <div slot="GPF" class="flex flex-col justify-center items-center">
-                                        <Check class="w-12 h-auto" />
+                                        <Check class="w-6 sm:w-12 h-auto" />
                                         <span class="mt-4">36, 48 ou 60 mois</span>
                                     </div>  
                                 </TableRow>
@@ -203,10 +208,10 @@ const { contract } = Astro.props as AvantagesProps;
                                         Plafond de remboursement au-delà de la durée choisie
                                         <br>(36, 48 ou 60 mois) :
                                     </span>
-                                    <Cross slot="WI" class="w-12 h-auto" />
-                                    <Cross slot="GVA"class="w-12 h-auto" />
+                                    <Cross slot="WI" class="w-6 sm:w-12 h-auto" />
+                                    <Cross slot="GVA"class="w-6 sm:w-12 h-auto" />
                                     <div slot="GPF" class="flex flex-col justify-center items-center">
-                                        <Check class="w-12 h-auto" />
+                                        <Check class="w-6 sm:w-12 h-auto" />
                                         <span class="mt-4">40% dans la limite de 40 000 €</span>
                                     </div> 
                                 </TableRow>
@@ -214,10 +219,10 @@ const { contract } = Astro.props as AvantagesProps;
                                     <span slot="text">
                                         Avantage si renouvellement par un véhicule neuf ou d’occasion :	
                                     </span>
-                                    <Cross slot="WI" class="w-12 h-auto" />
-                                    <Cross slot="GVA"class="w-12 h-auto" />
+                                    <Cross slot="WI" class="w-6 sm:w-12 h-auto" />
+                                    <Cross slot="GVA"class="w-6 sm:w-12 h-auto" />
                                     <div slot="GPF" class="flex flex-col justify-center items-center text-center">
-                                        <Check class="w-12 h-auto" />
+                                        <Check class="w-6 sm:w-12 h-auto" />
                                         <span class="mt-4">
                                             Remboursement augmenté de 10% ou plafond de remboursement augmenté à 52% dans la limite de 52 000 €
                                         </span>
@@ -229,17 +234,17 @@ const { contract } = Astro.props as AvantagesProps;
                                         <br>
                                         (Cat. C)	
                                     </span>
-                                    <Cross slot="WI" class="w-12 h-auto" />
-                                    <Cross slot="GVA"class="w-12 h-auto" />
-                                    <Check slot="GPF"class="w-12 h-auto" />
+                                    <Cross slot="WI" class="w-6 sm:w-12 h-auto" />
+                                    <Cross slot="GVA"class="w-6 sm:w-12 h-auto" />
+                                    <Check slot="GPF"class="w-6 sm:w-12 h-auto" />
                                 </TableRow>
                                 <TableRow noBorder>
                                     <span slot="text">
                                         Évènements familiaux
                                     </span>
-                                    <Cross slot="WI" class="w-12 h-auto" />
-                                    <Cross slot="GVA"class="w-12 h-auto" />
-                                    <Check slot="GPF"class="w-12 h-auto" />
+                                    <Cross slot="WI" class="w-6 sm:w-12 h-auto" />
+                                    <Cross slot="GVA"class="w-6 sm:w-12 h-auto" />
+                                    <Check slot="GPF"class="w-6 sm:w-12 h-auto" />
                                 </TableRow>
                             </tbody>
                         </table>

@@ -79,7 +79,7 @@ const BenefitsList = (props: BenefitsListProps): JSX.Element => {
 
   return (
     <motion.div className="relative w-full max-w-3xl mx-auto flex flex-col">
-      <div className="absolute z-0 top-0 bottom-0 left-[1.20rem] w-0 border-l-2 border-dashed border-bmw-light-gray"></div>
+      <div className="absolute z-0 top-0 bottom-0 left-[0.96rem] sm:left-[1.20rem] w-0 border-l-2 border-dashed border-bmw-light-gray"></div>
       { childs }
     </motion.div>
   )
@@ -98,11 +98,11 @@ const Item = ({ icon, children, onClick, theme, margin = false, isActive = false
   <motion.div
     initial={'inactive'}
     animate={isActive ? 'active' : 'inactive'}
-    className={clsx('relative z-10 flex flex-row items-center text-bmw-blue text-xs md:text-md lg:text-base', { 'mt-8': margin })}
+    className={clsx('relative z-10 flex flex-row items-center text-bmw-blue text-base md:text-md lg:text-base', { 'mt-8': margin })}
   >
     <div className={
       clsx(
-        'w-10 h-10 rounded-full border-2 flex justify-center items-center',
+        'w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 flex justify-center items-center',
         { 'border-bmw-blue': theme === 'primary' },
         { 'border-bmw-gray': theme === 'gray' },
         { 'border-bmw-light-gray': theme === 'light-gray' }
@@ -122,18 +122,18 @@ const Item = ({ icon, children, onClick, theme, margin = false, isActive = false
     </div>
     <Triangle className={
       clsx(
-        'w-7 h-auto ml-4 transform-gpu translate-x-1',
+        'w-6 sm:w-7 h-auto ml-4 transform-gpu translate-x-1',
         { 'text-bmw-blue': theme === 'primary' },
         { 'text-bmw-gray': theme === 'gray' },
         { 'text-bmw-light-gray': theme === 'light-gray' }
       )}
     />
-    <div className='relative h-24 text-white flex-1'>
+    <div className='relative sm:h-24 text-white flex-1'>
       <a
         onClick={onClick}
         className={
           clsx(
-            'cursor-pointer absolute flex -top-2 left-2 justify-center items-center w-28 h-28 border-4 bg-white rounded-full  z-10',
+            'cursor-pointer absolute flex -top-2 left-2 justify-center items-center w-20 h-20 sm:w-28 sm:h-28 border-4 bg-white rounded-full  z-10',
             { 'border-bmw-blue': theme === 'primary' },
             { 'border-bmw-gray': theme === 'gray' },
             { 'border-bmw-light-gray': theme === 'light-gray' }
@@ -154,7 +154,7 @@ const Item = ({ icon, children, onClick, theme, margin = false, isActive = false
       <motion.div
         variants={VARIANTS.container}
         className={
-          clsx('relative h-24 text-white w-full flex items-center z-0',
+          clsx('relative sm:h-24 text-white w-full flex items-center z-0',
             { 'bg-bmw-blue': theme === 'primary' },
             { 'bg-bmw-gray': theme === 'gray' },
             { 'bg-bmw-light-gray': theme === 'light-gray' }
@@ -162,7 +162,7 @@ const Item = ({ icon, children, onClick, theme, margin = false, isActive = false
       >
         <motion.p
           variants={VARIANTS.text}
-          className="pl-36 pr-4 leading-tight"
+          className="pl-24 sm:pl-36 py-2 sm:py-0 pr-4"
         >
           { children }
         </motion.p>

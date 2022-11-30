@@ -36,21 +36,21 @@ const Clipboard = (props: SVGProps<SVGSVGElement>) => (
 const AdvantagesList = (): JSX.Element => {
   return (
     <BenefitsList noAnim>
-      <BenefitsList.Item theme='gray' icon={(<Folder className="w-12 h-auto" />)}>
+      <BenefitsList.Item theme='gray' icon={(<Folder className="w-6 sm:w-8 h-auto" />)}>
         <span slot="text">
           Faites-nous parvenir, entre 10 jours et 2 mois après la fin de
           votre contrat, votre certificat d’immatriculation original et en
           conserver une copie ainsi que le coupon détachable.
         </span>
       </BenefitsList.Item>
-      <BenefitsList.Item theme='primary' icon={(<Enveloppe className="w-12 h-auto" />)}>
+      <BenefitsList.Item theme='primary' icon={(<Enveloppe className="w-6 sm:w-8 h-auto" />)}>
         <span slot="text">
           Le certificat d’immatriculation original est à envoyer
           à l’adresse suivante: <span className="font-bold">BMW Finance TSA 36646
           91097 COURCOURONNES CEDEX.</span>
         </span>
       </BenefitsList.Item>
-      <BenefitsList.Item theme='light-gray' icon={(<Clipboard className="w-12 h-auto" />)}>
+      <BenefitsList.Item theme='light-gray' icon={(<Clipboard className="w-6 sm:w-8 h-auto" />)}>
         <span slot="text">
           Nous vous enverrons le certificat d’immatriculation barré
           et tamponné ainsi qu'un certificat de cession établi à votre

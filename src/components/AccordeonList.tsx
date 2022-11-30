@@ -95,21 +95,21 @@ const Item = ({ title, tag, icon, children, isActive = false, onSelected }: Acco
     <motion.div
       initial="inactive"
       animate={isActive ? 'active' : 'inactive'}
-      className="w-full space-y-2"
+      className="relative z-10 w-full space-y-2"
     >
       <a href="#"
         onClick={onSelected}
         className={
           clsx(
-            'relative w-full py-6 px-28 bg-bmw-blue text-lg transition flex flex-row items-center font-light',
+            'relative w-full py-6 px-16 sm:px-24 bg-bmw-blue text-lg transition flex flex-row items-center font-light',
             { 'bg-bmw-blue text-white': isActive },
             { 'bg-bmw-light-gray text-bmw-gray': !isActive }
           )}
       >
-        <div className="absolute top-0 left-12 bottom-0 flex justify-center items-center">
+        <div className="absolute top-0 left-4 sm:left-12 bottom-0 flex justify-center items-center text-white">
           { icon }
         </div>
-        <div className="absolute top-0 right-12 bottom-0 flex justify-center items-center">
+        <div className="absolute top-0 right-4 sm:right-12 bottom-0 flex justify-center items-center text-white">
           <motion.div variants={VARIANTS.chevron}>
             <Chevron className="w-8 h-auto" />
           </motion.div>
@@ -118,7 +118,7 @@ const Item = ({ title, tag, icon, children, isActive = false, onSelected }: Acco
         { title }
       </a>
       <motion.div variants={VARIANTS.container} className='w-full overflow-hidden'>
-        <motion.div variants={VARIANTS.text} className='w-full py-6 px-12 lg:px-28'>
+        <motion.div variants={VARIANTS.text} className='w-full py-4 sm:py-6 px-4 sm:px-12 lg:px-28'>
           { children }
         </motion.div>
       </motion.div>

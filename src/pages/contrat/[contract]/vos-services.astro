@@ -4,6 +4,7 @@ import type { ContractInfo } from "../../../typings";
 import { contracts } from "../../../contracts";
 import Page from "../../../layouts/Page.astro";
 import servicesBackground from "../../../assets/images/services_background.jpg";
+import servicesBackgroundMobile from "../../../assets/images/services_background_mobile.jpg";
 import PageHeader from "../../../components/PageHeader.astro";
 import GearIcon from "../../../components/SVG/GearIcon.astro";
 import Section from "../../../components/Section.astro";
@@ -29,10 +30,13 @@ const item = {
 }
 ---
 
-<Page title="Vos services">
+<Page title="Vos services" contract={contract} nextPage={{ name: "Vos garanties", href: `/contrat/${contract.path}/vos-garanties`}}>
     <PageHeader
         slot="header"
+        contract={contract}
+        currentUrl={`/contrat/${contract.path}/vos-services`}
         imageSrc={servicesBackground}
+        mobileImageSrc={servicesBackgroundMobile}
         imageAlt="Vos services"
         title={contract.cosyName}
         subTitle="Vos services"
@@ -75,6 +79,7 @@ const item = {
             </div>
             <Picture
                 src={peopleSmileImg}
+                class="hidden md:block"
                 fill="cover"
                 alt="couple qui sourit"
                 sizes="(min-width: 768px) 40vw, 100vw"

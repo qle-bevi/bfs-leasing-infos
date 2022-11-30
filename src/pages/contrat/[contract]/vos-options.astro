@@ -1,0 +1,194 @@
+---
+import type { Props } from "astro";
+import familyEventsImg from "../../../assets/images/family_events.jpg";
+import rachatFranchiseImg from "../../../assets/images/rachat_franchise.jpg";
+import TabMenu from "../../../components/TabMenu";
+import headerBackground from "../../../assets/images/options_background.jpg";
+import headerBackgroundMobile from "../../../assets/images/options_background_mobile.jpg";
+import { contracts } from "../../../contracts";
+import type { ContractInfo } from "../../../typings";
+import PageHeader from "../../../components/PageHeader.astro";
+import Page from "../../../layouts/Page.astro";
+import Section from "../../../components/Section.astro";
+import SectionTitle from "../../../components/SectionTitle.astro";
+import Paragraph from "../../../components/Paragraph.astro";
+import Info from "../../../components/SVG/Info.astro";
+import InfosBar from "../../../components/InfosBar.astro";
+import Options from "../../../components/SVG/Options.astro";
+import SectionSubTitle from "../../../components/SectionSubTitle.astro";
+import { Picture } from "@astrojs/image/components";
+
+
+export const getStaticPaths = () => {
+    return contracts.map(c => ({ params: { contract: c.path }, props: { contract: c }}))
+}
+
+interface AvantagesProps extends Props {
+    contract: ContractInfo
+}
+
+const { contract } = Astro.props as AvantagesProps;
+---
+
+<Page title="Vos options" contract={contract} nextPage={{ name: "Vos contacts et démarches", href: `/contrat/${contract.path}/vos-contacts-et-demarches`}}>
+    <PageHeader
+        slot="header"
+        contract={contract}
+        currentUrl={`/contrat/${contract.path}/vos-options`}
+        imageSrc={headerBackground}
+        mobileImageSrc={headerBackgroundMobile}
+        imageAlt="Vos options"
+        imagePosition="top"
+        title={contract.cosyName}
+        subTitle="Vos options"
+        menuUrl={`/contrat/${contract.path}`}
+    >
+        <Options slot="icon" class="w-8 h-auto" />
+    </PageHeader>
+        <TabMenu
+            client:visible
+            items={[
+                { title: "ÉVÈNEMENT FAMILIAUX", key: "EF" },
+                { title: "RACHAT DE FRANCHISE", key: "RF" },
+                { title: "EFFETS PERSONNELS", key: "EP" },
+            ]}
+            initialKey="EF"
+        >
+                <div slot="EF">
+                    <Section noBorder>
+                        <SectionTitle>ÉVÈNEMENT FAMILIAUX.</SectionTitle>
+                        <div class="flex flex-col md:flex-row items-stretch space-y-8 md:space-x-8 md:space-y-0">
+                            <div class="flex-1 flex flex-col">
+                                <SectionSubTitle>
+                                    En cas d’imprévus, vous pouvez solder sereinement 
+                                    votre financement.
+                                </SectionSubTitle>
+                                
+                                <Paragraph>
+                                    <span class="font-bold">Le principe</span>
+                                    <br><br>
+                                    Vous devez solder de manière anticipée votre financement pour pouvoir revendre votre véhicule : nous vous remboursons la différence entre le solde(1) du financement et la valeur personnalisée Argus (PRO) du véhicule, quel que soit le montant de la vente que vous effectuez.
+                                </Paragraph>
+                                <Paragraph>
+                                    <span class="font-bold">Vente consécutive à :</span>
+                                </Paragraph>
+                                <div class="flex flex-col md:flex-row justify-between">
+                                    <div>
+                                        • Divorce ou dissolution de PACS<br>
+                                        • Mariage ou PACS<br>
+                                        • Naissance ou adoption
+                                    </div>
+                                    <div>
+                                        • Mutation à l’étranger ou dans les DROM COM<br>
+                                        • Perte d’emploi de l’assuré salarié<br>
+                                        • Cessation d’activité suite à des difficultés économiques<br>
+                                    </div>
+                                </div>
+                            </div>
+                            <Picture
+                                src={familyEventsImg}
+                                fill="cover"
+                                alt="famille en voiture"
+                                sizes="(min-width: 768px) 35vw, 100vw"
+                                widths={[420, 325, 653]}
+                                aspectRatio="653:473"
+                            />
+                        </div>
+                        <div class="bg-bmw-light-gray mt-8 py-1 px-4 flex flex-row items-center space-x-4 uppercase">
+                            <Info class="w-8 h-auto" />
+                            <p>
+                                INCLUS DANS LA GARANTIE VALEUR D’ACHAT<br>
+                                EN OPTION DANS LA GARANTIE PERTE FINANCIÈRE
+                            </p>
+                        </div>
+                    </Section>
+                </div>
+                <div slot="RF">
+                    <Section noBorder>
+                        <SectionTitle>RACHAT DE FRANCHISE.</SectionTitle>
+                        <div class="flex flex-col md:flex-row items-stretch space-y-8 md:space-x-8 md:space-y-0">
+                            <div class="flex-1 flex flex-col">
+                                <SectionSubTitle>
+                                    Pour prendre en charge la franchise de votre assurance auto sur les autres sinistres que la disparition (vol non retrouvé) et la destruction totale.
+                                </SectionSubTitle>
+                                
+                                <Paragraph>
+                                    <span class="font-bold">Le principe</span>
+                                    <br><br>
+                                    Nous vous remboursons le montant des réparations laissées à votre charge par votre
+                                    assureur principal, dans la limite de 600€ lorsque les réparations ont été effectuées
+                                    dans le réseau des concessionnaires agréés (sinon dans la limite de 400€)
+                                </Paragraph>
+                                <Paragraph last>
+                                    <span class="font-bold">Vente consécutive à :</span>
+                                    <br><br>
+                                    <div>
+                                        • Collision responsable avec Tiers Identifié<br>
+                                        • Vol du véhicule retrouvé dans les 30 jours endommagé et réparable<br>
+                                        • Incendie du véhicule réparable<br>
+                                    </div>
+                                </Paragraph>
+                            </div>
+                            <Picture
+                                src={rachatFranchiseImg}
+                                fill="cover"
+                                alt="rachat de franchise"
+                                sizes="(min-width: 768px) 36vw, 100vw"
+                                widths={[420, 325, 653]}
+                                aspectRatio="653:473"
+                            />
+                        </div>
+                    </Section>
+                </div>
+                <div slot="EP">
+                    <Section noBorder>
+                        <SectionTitle>EFFETS PERSONNELS.</SectionTitle>
+                        <SectionSubTitle>
+                            Pour couvrir certains objets qui vous sont chers à bord de votre véhicule.
+                        </SectionSubTitle>
+                        
+                        <Paragraph>
+                            <span class="font-bold">Le principe</span>
+                            <br><br>
+                            Nous vous remboursons en valeur à neuf et sur facture, certains objets volés ou endommagés dans votre véhicule en cas de vol ou de destruction totale de votre véhicule,
+                            <br>
+                            • dans la limite de 750 € pour les particuliers<br>
+                            • dans la limite de 1 500 € pour les professionnels
+                        </Paragraph>
+                        <Paragraph>
+                            <span class="font-bold">Les types d'objets garantis :</span>
+                        </Paragraph>
+                            <div class="grid grid-rows-2 sm:grid-rows-1 grid-cols-2 sm:grid-cols-4 gap-2">
+                                <div class="bg-[#F2F2F2] flex flex-col items-center space-y-2 pt-4 pb-6 px-6">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 73.383 85.256" class="h-14 w-auto"><defs><clipPath id="a"><path fill="none" d="M0 0h56.369v73.16H0z" data-name="Rectangle 92"/></clipPath></defs><g data-name="Groupe 75"><g clip-path="url(#a)" data-name="Groupe 74" transform="rotate(14.98 9.435 71.87)"><path d="M36.769 73.159H6.667A6.676 6.676 0 0 1 0 66.49V6.668A6.675 6.675 0 0 1 6.667 0h30.1a6.676 6.676 0 0 1 6.669 6.668v10.764a1.715 1.715 0 0 1-3.43 0V6.668a3.242 3.242 0 0 0-3.237-3.238H6.667a3.241 3.241 0 0 0-3.238 3.238V66.49a3.242 3.242 0 0 0 3.238 3.24h30.1a3.243 3.243 0 0 0 3.239-3.239V48.3a1.715 1.715 0 1 1 3.43 0v18.19a6.677 6.677 0 0 1-6.669 6.669Z" data-name="Tracé 108"/><path d="M36.769 73.159H6.667A6.676 6.676 0 0 1 0 66.49v-9.335a1.715 1.715 0 0 1 1.715-1.715h40.009a1.715 1.715 0 0 1 1.715 1.715v9.335a6.677 6.677 0 0 1-6.669 6.669ZM3.428 58.87v7.62a3.242 3.242 0 0 0 3.237 3.239h30.1a3.243 3.243 0 0 0 3.239-3.239v-7.62Z" data-name="Tracé 109"/><path d="M26.005 11.289h-8.573a1.715 1.715 0 0 1 0-3.43h8.573a1.715 1.715 0 0 1 0 3.43" data-name="Tracé 110"/><path d="M24.362 64.3a2.643 2.643 0 1 1-2.643-2.643 2.643 2.643 0 0 1 2.643 2.643" data-name="Tracé 111"/><path d="M54.655 32.218a1.707 1.707 0 0 1-1.212-.5 16.594 16.594 0 0 0-23.441 0 1.714 1.714 0 0 1-2.424-2.424 20.022 20.022 0 0 1 28.289 0 1.715 1.715 0 0 1-1.212 2.927Z" data-name="Tracé 112"/><path d="M48.997 37.871a1.708 1.708 0 0 1-1.212-.5 8.783 8.783 0 0 0-12.126 0 1.714 1.714 0 0 1-2.424-2.425 12 12 0 0 1 16.975 0 1.715 1.715 0 0 1-1.213 2.925Z" data-name="Tracé 113"/><path d="M39.298 42.726a1.715 1.715 0 0 1-1.21-2.924 5.269 5.269 0 0 1 7.276 0 1.714 1.714 0 1 1-2.424 2.424 1.754 1.754 0 0 0-2.422 0 1.712 1.712 0 0 1-1.22.5Z" data-name="Tracé 114"/></g></g></svg>
+                                    <p class="text-center">
+                                        <span class="font-bold">Objets connectés</span><br>
+                                        (smartphone par exemple) 
+                                    </p>
+                                </div>
+                                <div class="bg-[#F2F2F2] flex flex-col items-center space-y-2 pt-4 pb-6 px-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96.119 92.696" class="h-14 w-auto"><g data-name="Groupe 71"><g  data-name="Groupe 70" transform="rotate(-49 41.045 18.706)"><path fill-rule="evenodd" d="M16.11 11.151V28.5h3.718V3.725A3.718 3.718 0 0 1 23.557 0h8.667a4.953 4.953 0 0 1 4.954 4.953v3.726A4.287 4.287 0 0 1 32.059 13l-8.74-1.457a3.958 3.958 0 0 1-1.012-.315V28.5h7.435v-9.914a3.715 3.715 0 0 1 3.708-3.716h8.694a3.719 3.719 0 0 1 3.708 3.716v4.961a3.225 3.225 0 0 1-3.9 3.252L33.2 25.208a3.956 3.956 0 0 1-.976-.315V28.5h6.2a1.239 1.239 0 0 1 1.239 1.24v8.674h3.71a6.2 6.2 0 0 1 6.2 6.193v28.51a6.2 6.2 0 0 1-6.2 6.192h-3.84a6.185 6.185 0 0 1-6.06 4.957H13.62a6.184 6.184 0 0 1-6.184-6.194V29.741A1.239 1.239 0 0 1 8.675 28.5h4.957V17.594l-8.518 1.549A4.224 4.224 0 0 1 0 14.868v-2.474a4.965 4.965 0 0 1 4.964-4.96H12.4a3.714 3.714 0 0 1 3.71 3.716ZM37.177 40.9H9.913v37.174a3.706 3.706 0 0 0 3.706 3.716h19.853a3.709 3.709 0 0 0 3.7-3.716ZM9.913 38.416h27.264v-7.435H9.913Zm3.718-27.266A1.236 1.236 0 0 0 12.4 9.914H4.963a2.485 2.485 0 0 0-2.485 2.481v2.474A1.753 1.753 0 0 0 4.67 16.7l8.961-1.629ZM34.7 4.953a2.475 2.475 0 0 0-2.475-2.475h-8.669a1.24 1.24 0 0 0-1.25 1.247v3.7a1.8 1.8 0 0 0 1.42 1.675l8.74 1.457A1.815 1.815 0 0 0 34.7 8.678Zm8.675 13.634a1.24 1.24 0 0 0-1.23-1.237h-8.696a1.237 1.237 0 0 0-1.23 1.237v2.483a1.845 1.845 0 0 0 1.42 1.7l8.761 1.592a.758.758 0 0 0 .976-.814ZM39.659 40.9v35.933h3.706a3.72 3.72 0 0 0 3.726-3.714v-28.51a3.723 3.723 0 0 0-3.726-3.709Z" data-name="Tracé 106"/></g></g></svg>
+                                        <p class="text-center">
+                                            <span class="font-bold">Équipements de sport</span><br>
+                                            (sac de golf par exemple)
+                                        </p>
+                                </div>
+                                <div class="bg-[#F2F2F2] flex flex-col items-center space-y-2 pt-4 pb-6 px-6">
+                                    <svg xmlns="http://www.w3.org/2000/svg" data-name="Groupe 73" viewBox="0 0 104.818 104.925" class="h-14 w-auto"><g data-name="Groupe 72"><path d="m94.226 0-.851 1.084c-.062.077-6.153 7.778-10.887 9.327l-.573.186-.2.569c-.683 1.938-1.64 4.45-1.939 5.231L50.467 45.7c-4.142-2.573-7.749-3.844-10.989-3.844a12.564 12.564 0 0 0-9.058 4.01c-1.724 1.724-2.726 4.184-3.693 6.562-.824 2.027-1.6 3.943-2.7 5.036-1.457 1.456-3.962 1.555-6.865 1.67-3.815.15-8.139.322-11.517 3.7-8.353 8.366-7.314 22.178 2.308 32.483l-.021.032.849.833c5.623 5.559 12.775 8.746 19.633 8.746a19.433 19.433 0 0 0 14.058-5.706c3.44-3.44 3.491-7.706 3.538-11.47.034-2.838.065-5.291 1.535-6.763a14.675 14.675 0 0 1 4.972-2.6 18.9 18.9 0 0 0 6.337-3.414c1.442-1.351 2.133-2.622 2.115-3.884a3.836 3.836 0 0 0-1.476-2.839 7.193 7.193 0 0 0-3.942-1.5 4.987 4.987 0 0 1-2.814-1c-2.241-2.136-.11-4.847.223-5.241l35.463-35.464c.779-.3 3.306-1.259 5.233-1.939l.568-.2.187-.573c1.545-4.726 9.248-10.824 9.326-10.885l1.083-.852ZM51.053 67.522a7.076 7.076 0 0 0 4.127 1.644 5.118 5.118 0 0 1 2.7.912c.641.565.646.923.647 1.042a3.469 3.469 0 0 1-1.341 2.063A17.119 17.119 0 0 1 51.64 76.1c-2.127.818-4.328 1.664-5.824 3.159-2.175 2.176-2.215 5.373-2.252 8.464-.043 3.459-.087 7.036-2.821 9.77a17.037 17.037 0 0 1-12.328 4.989c-6.161 0-12.621-2.875-17.766-7.895l-.265-.269C1.1 84.931-.193 72.142 7.377 64.57c2.7-2.7 6.353-2.846 9.884-2.984 3.273-.13 6.365-.252 8.5-2.386 1.444-1.444 2.314-3.581 3.234-5.843.876-2.155 1.783-4.381 3.157-5.755 4.381-4.382 9.4-4.426 16.542-.121l-12.707 12.7a1.221 1.221 0 0 0 0 1.73l6.921 6.922a1.224 1.224 0 0 0 1.731 0l4.675-4.675a5.385 5.385 0 0 0 1.743 3.361ZM92.3 20.994a263.87 263.87 0 0 0-4.252 1.578l-5.8-5.8c.369-.969 1.03-2.721 1.58-4.254 4.165-1.67 8.719-6.658 10.6-8.867l6.74 6.742c-2.207 1.877-7.195 6.431-8.866 10.6ZM24.934 86.806a1.224 1.224 0 0 1-1.731 1.73l-6.919-6.919a1.223 1.223 0 0 1 1.73-1.73Zm8.895-7.163a1.224 1.224 0 0 1 0 1.731l-2.6 2.594a1.224 1.224 0 0 1-1.731 0l-8.65-8.65a1.221 1.221 0 0 1 0-1.73l2.6-2.6a1.258 1.258 0 0 1 1.73 0Zm6.2-6.2a1.221 1.221 0 0 1 0 1.73l-2.6 2.6a1.224 1.224 0 0 1-1.731 0l-8.651-8.647a1.221 1.221 0 0 1 0-1.73l2.6-2.6a1.258 1.258 0 0 1 1.73 0Z" data-name="Tracé 107"/></g></svg>
+                                    <p class="text-center">
+                                        <span class="font-bold">Instruments de musique</span>
+                                    </p>
+                                </div>
+                                <div class="bg-[#F2F2F2] flex flex-col items-center space-y-2 pt-4 pb-6 px-6">
+                                    <svg xmlns="http://www.w3.org/2000/svg" data-name="Groupe 69" viewBox="0 0 81.114 71.761" class="h-14 w-auto"><g stroke="#000" data-name="Groupe 68"><path d="M77.991 47.8v16.161a6.237 6.237 0 0 1-6.238 6.238H9.36a6.237 6.237 0 0 1-6.238-6.238V47.8a14.123 14.123 0 0 1-1.558-2.433v18.594a7.812 7.812 0 0 0 7.8 7.8h62.388a7.812 7.812 0 0 0 7.8-7.8V45.4a14.1 14.1 0 0 1-1.566 2.4Z" data-name="Tracé 102"/><path d="M56.106 0h-31.1a4.007 4.007 0 0 0-3.95 4.055V15.6h7.9V9.044a.892.892 0 0 1 .811-.932h21.548a.891.891 0 0 1 .811.932V15.6h7.892V4.055A4.008 4.008 0 0 0 56.106 0Zm2.393 14.041h-4.784v-5a2.432 2.432 0 0 0-2.393-2.5H29.793a2.432 2.432 0 0 0-2.393 2.5v4.988h-4.785V4.055a2.432 2.432 0 0 1 2.393-2.5h31.1a2.432 2.432 0 0 1 2.393 2.5Z" data-name="Tracé 103"/><path d="M0 14.042V39a14.056 14.056 0 0 0 14.04 14.033h15.6v-1.558h-15.6A12.475 12.475 0 0 1 1.557 39V15.6h77.991V39a12.475 12.475 0 0 1-12.475 12.475h-15.6v1.558h15.6A14.056 14.056 0 0 0 81.113 39V14.042Z" data-name="Tracé 104"/><path d="M48.668 46.794H32.445a2.814 2.814 0 0 0-2.806 2.807v9.985a2.815 2.815 0 0 0 2.806 2.807h16.223a2.815 2.815 0 0 0 2.806-2.807v-9.985a2.814 2.814 0 0 0-2.806-2.807m1.249 12.792a1.248 1.248 0 0 1-1.249 1.249H32.445a1.249 1.249 0 0 1-1.249-1.249v-9.985a1.249 1.249 0 0 1 1.249-1.249h16.223a1.249 1.249 0 0 1 1.249 1.249Z" data-name="Tracé 105"/><path d="M34.878 53.786h11.356v1.622H34.878z" data-name="Rectangle 88"/></g></svg>
+                                    <p class="text-center">
+                                        <span class="font-bold">Objets liés à l’activité professionnelle</span><br>
+                                        (pour les clients Professionnels)
+                                    </p>
+                                </div>
+                            </div>
+                        
+                    </Section>
+                </div>
+        </TabMenu>
+</Page>

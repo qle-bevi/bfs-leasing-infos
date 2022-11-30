@@ -2,23 +2,36 @@
 import Layout from '../layouts/Layout.astro';
 import HomeBackground from "../assets/images/home_background.jpg";
 import Header from '../components/Header.astro';
-import MainMenuButton from '../components/pages/MainMenu/MainMenuButton.astro';
+import MainMenuButton from '../components/pages/MainMenu/MainMenuButton';
 import { contracts } from "../contracts";
+import headerBackground from "../assets/images/menu_mobile.jpg"
 import PageBackgroundImage from '../components/PageBackgroundImage.astro';
+import PageHeader from '../components/PageHeader.astro';
 ---
 
 <Layout title="BMW FInancial Services">
 	<PageBackgroundImage imageSrc={HomeBackground}>
-		<Header />
-		<div class="flex-1 flex justify-center items-center py-4">
-			<div class="p-10 bg-white bg-opacity-90 w-full max-w-3xl mx-12">
-				<h3 class="bmw-gray text-center text-3xl font-bold uppercase border-b border-b-bmw-gray pb-6 mb-4">
-					Bienvenue chez<br> BMW Financial Services
-				</h3>
-				<p class="text-lg font-light text-bmw-gray text-center">Sélectionnez votre contrat en cours et accédez à toutes les informations pratiques.</p>
-				<nav class="mt-4 w-full max-w-md space-y-2 flex flex-col items-center mx-auto">
-					{ contracts.map((contract) => <MainMenuButton text={contract.name} href={`/contrat/${contract.path}`} />) }
-				</nav>
+		<div class="w-full h-full overflow-y-auto">	
+			<Header />
+			<PageHeader
+				mobileOnly
+				noMenuButton
+				mobileImageSrc={headerBackground}
+			/>
+			<div class="flex-grow flex justify-center items-center sm:py-4">
+				<div class="p-10 bg-white bg-opacity-90 w-full max-w-3xl sm:mx-12 ">
+					<h3 class="bmw-gray text-center text-3xl font-bold uppercase border-b border-b-bmw-gray pb-6 mb-4">
+						Bienvenue chez<br> BMW Financial Services
+					</h3>
+					<p class="text-lg font-light text-bmw-gray text-center">Sélectionnez votre contrat en cours et accédez à toutes les informations pratiques.</p>
+					<nav class="mt-4 w-full max-w-md space-y-2 flex flex-col items-center mx-auto">
+						{ contracts.map((contract) => (
+							<div class="w-full">
+								<MainMenuButton client:visible label={contract.name} href={`/contrat/${contract.path}`} text={contract.textInfo} />
+							</div>
+						))}
+					</nav>
+				</div>
 			</div>
 		</div>
 	</PageBackgroundImage>

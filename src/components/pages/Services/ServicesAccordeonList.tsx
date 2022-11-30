@@ -43,19 +43,19 @@ const ServicesAccordeonList = (): JSX.Element => (
   <AccordeonList>
     <AccordeonList.Item
       title="Liberté de choix"
-      icon={(<Cross className="w-8 h-auto" />)}
+      icon={(<Cross className="w-4 sm:w-8 h-auto" />)}
     >
       <p>Choisissez en fonction de vos besoins la durée et le kilométrage qui vous correspondent le mieux.</p>
     </AccordeonList.Item>
     <AccordeonList.Item
       title="Maîtrise des coûts"
-      icon={(<Euro className="w-8 h-auto" />)}
+      icon={(<Euro className="w-4 sm:w-8 h-auto" />)}
     >
       <p>Choisissez en fonction de vos besoins la durée et le kilométrage qui vous correspondent le mieux.</p>
     </AccordeonList.Item>
     <AccordeonList.Item
       title="Cessibilité"
-      icon={(<Switch className="w-8 h-auto" />)}
+      icon={(<Switch className="w-4 sm:w-8 h-auto" />)}
     >
       <p>Choisissez en fonction de vos besoins la durée et le kilométrage qui vous correspondent le mieux.</p>
     </AccordeonList.Item>

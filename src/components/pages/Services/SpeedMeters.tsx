@@ -83,7 +83,7 @@ const Needle = (props: SVGProps<SVGSVGElement>) => (
 
 const SpeedMeters = () => {
   return (
-    <div className="flex-1 w-full border border-bmw-gray flex flex-col space-y-8 py-8 justify-center items-center mt-4 text-center">
+    <div className="flex-1 w-full border border-bmw-gray flex flex-col space-y-8 px-14 py-8 justify-center items-center mt-4 text-center">
       <span>Le montant de la couverture atteint jusqu'à <span className="font-bold">120 000€</span></span>
       <div className="relative">
         <Counter className="w-64 h-auto" />

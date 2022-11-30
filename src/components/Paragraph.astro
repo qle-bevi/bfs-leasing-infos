@@ -9,6 +9,6 @@ interface ParagraphProps extends Props {
 const { last = false } = Astro.props as ParagraphProps;
 ---
 
-<p class={clsx("w-full max-w-6xl", { 'mb-8': last === false })}>
+<p class={clsx("w-full max-w-5xl", { 'mb-8': last === false })}>
     <slot />
 </p>
