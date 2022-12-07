@@ -31,7 +31,7 @@ const contract = contracts.find((c) => c.path === contractPath)!;
 
 <Layout title={`BMW Financial Services / contrat ${contract.name}`}>
     <PageBackgroundImage imageSrc={MenuBackground}>
-        <div class="w-full h-full overflow-hidden bg-bmw-gray sm:flex sm:flex-col sm:bg-transparent">
+        <div class="w-full h-full overflow-hidden bg-white sm:flex sm:flex-col sm:bg-transparent">
             <div class="w-full h-full items-center flex flex-col flex-grow sm:px-12 sm:pb-6 overflow-auto">
                 <div class="w-full sm:hidden">
                     <PageHeader
@@ -42,7 +42,9 @@ const contract = contracts.find((c) => c.path === contractPath)!;
                     />
                 </div>
                 <header class="hidden sm:flex w-full pt-8 pb-4 flex-row justify-between items-center border-b border-white">
-                    <h1 class="text-white text-2xl font-bold text-shadow-xl">BMW Financial Services</h1>
+                    <a href="/">
+                        <h1 class="text-white text-2xl font-bold text-shadow-xl">BMW Financial Services</h1>
+                    </a>
                     <div class="flex flex-row items-center">
                         <BurgerMenuButton contract={contract} currentUrl={`/contrat/${contract.path}`} client:load />
                         <BmwLogo class="ml-8 w-16 h-auto" />

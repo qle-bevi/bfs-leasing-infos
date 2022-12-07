@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useState } from 'react'
+import React, { MouseEventHandler, useEffect, useState } from 'react'
 import { motion, Variants } from 'framer-motion'
 import clsx from 'clsx'
 
@@ -40,17 +40,21 @@ const VARIANTS: Record<string, Variants> = {
 }
 
 const Card = (props: Record<string, any>) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState<boolean>(props.isOpen ?? false)
 
   const handleClick: MouseEventHandler<HTMLAnchorElement> = (ev) => {
     ev.preventDefault()
     setIsOpen(!isOpen)
-
-    setTimeout(() => {
-      const $scroller: HTMLElement = document.getElementById('scroller') as HTMLElement
-      $scroller.scrollTo(0, document.body.scrollHeight)
-    }, 200)
   }
+
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => {
+        const $scroller: HTMLElement = document.getElementById('scroller') as HTMLElement
+        $scroller.scrollTo(0, document.body.scrollHeight)
+      }, 200)
+    }
+  }, [isOpen])
 
   return (
     <div className="h-auto">

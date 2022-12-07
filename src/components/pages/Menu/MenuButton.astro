@@ -9,7 +9,7 @@ type MenuButtonProps = {
 const { href = "#" } = Astro.props as MenuButtonProps;
 ---
 
-<a href={href} class="bg-white text-sm py-8 px-4 hover:bg-bmw-blue transition-colors duration-300 uppercase bg-opacity-90 flex flex-col justify-center items-center text-bmw-gray hover:text-white space-y-6 text-center font-bold">
+<a href={href} class="border shadow-md sm:shadow-none sm:border-0 border-bmw-light-gray bg-white text-sm py-8 px-4 hover:bg-bmw-blue transition-colors duration-300 uppercase bg-opacity-90 flex flex-col justify-center items-center text-bmw-gray hover:text-white space-y-6 text-center font-bold">
     <div class="flex-1 flex w-full justify-center items-center">
         <slot name="icon" />
     </div>

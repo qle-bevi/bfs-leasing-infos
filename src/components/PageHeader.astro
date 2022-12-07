@@ -51,7 +51,9 @@ const { mobileOnly = false, noMenuButton = false, contract, currentUrl, imageSrc
         formats={["jpeg"]}
     />
     <div class="bg-gradient-to-t sm:bg-gradient-to-bl from-transparent via-black/30 to-black absolute inset-0 h-64 z-10"></div>
-    <h1 class="hidden sm:block absolute top-10 left-6 sm:left-12 text-white text-2xl font-bold text-shadow-xl z-20">BMW Financial Services</h1>
+    <a href="/">
+        <h1 class="hidden sm:block absolute top-10 left-6 sm:left-12 text-white text-2xl font-bold text-shadow-xl z-20">BMW Financial Services</h1>
+    </a>
     <div class="absolute top-8 left-6 sm:left-auto right-6 sm:right-12 flex flex-row justify-between sm:justify-start md:items-center space-x-2 md:space-x-4 lg:space-x-8 z-50">
         { !noMenuButton && <MenuButton contract={contract} currentUrl={currentUrl} client:load /> }
         { !noMenuButton && <div />}
